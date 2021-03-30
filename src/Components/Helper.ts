@@ -74,6 +74,8 @@ export const mockData2: ScalePopupProps = {
 export const getNormalScale = (stringScale: string): string[] => stringScale.split(',')
     .map(x => x.replace(/([^\d]*)(\d*(\.\d{0,2})?)(.*)/, '$2'));
 
-export const getScaleRequest =()=>{
-    return mockData2;
-}
+export const getScaleRequest: Promise<ScalePopupProps> = new Promise((resolve)  => {
+        setTimeout(() => {
+            resolve(mockData2);
+        }, 300);
+    });
