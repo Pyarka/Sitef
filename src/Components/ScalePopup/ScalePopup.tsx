@@ -5,6 +5,7 @@ import NumberBox from "../NumberBox/NumberBox";
 const ScalePopup = (): ReactElement => {
     const [scale, setScale] = useState([] as string[]);
     const [values, setValues] = useState([] as ValuesInterface[]);
+    const [isEditingScale, setEditingScale] = useState(false);
 
     useEffect(() => {
         getScaleRequest.then(({values, scale}: ScalePopupProps) => {
@@ -14,17 +15,27 @@ const ScalePopup = (): ReactElement => {
              setValues(newValues);
         });
     }, []);
+
     console.log('values => ', values);
     console.log('scale => ', scale);
     const changeValue = (num:number, masValue:number) => {
-        //1. В массив Values 2. найти элемент у которого num равен индексу(num) 3. изменить значение элемента 4. отдать новый массив в ыуеМфдгуы
         const newValues = values.map((valuesItem) => {
-            if (valuesItem.num != num) return valuesItem;
+            if (valuesItem.num !== num) return valuesItem;
             return {num, value: masValue};
         })
         setValues(newValues);
     }
-    const renderScale = (i: number) => <div>{scale[i]}</div>
+    const renderScale = (i: number): ReactElement => {
+        // вернуть инпут  NumberBox со значением из массива scale по индексу i если isEditingScale
+        if(){
+            return <NumberBox />
+        }
+        return (
+            <div>
+                {scale[i]}
+            </div>
+        );
+    }
     const renderValues = (i: number): ReactElement | null => {
         const useValue = values.find(({num}) => num === i);
         if (!useValue || !useValue.value) return null;
