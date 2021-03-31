@@ -26,9 +26,10 @@ const ScalePopup = (): ReactElement => {
 
     const renderCell = () => {
         return scale.map((scaleItem, i) => {
-                return <div key={scaleItem}>
-                    <div>{renderScale(i)}</div>
-                    <div>{renderValues(i)}</div>
+                return <div className={'cellsRow'} key={scaleItem}>
+                    <div className={'cellsScale'}>{renderScale(i)}</div>
+                    <div className={'space'}></div>
+                    <div className={'cellsValues'}>{renderValues(i)}</div>
                 </div>
             })
     }

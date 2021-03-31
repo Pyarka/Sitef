@@ -11,3 +11,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.cellsContainer {
+  width: 210px;
+  box-shadow: 0 0 5px 1px rgb(0.0.0.0) ;
+  display: flex;
+  flex-direction: column;
+}
+.cellsRow {
+  width: 150px;
+  height: 25px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin-bottom: 3px;
+  margin-top: 3px;
+}
+.cellsScale {
+  color: #00a9bb;
+  text-align: end;
+  width: 15px;
+}
+.cellsValues {
+  text-align: start;
+  width: 100px;
+}
+.space {
+  width: 10px;
+  height: 11px;
+}
