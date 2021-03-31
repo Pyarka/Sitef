@@ -1,6 +1,6 @@
 export interface ValuesInterface {
     num: number;
-    value: string
+    value: number;
 }
 
 export interface ScalePopupProps {
@@ -32,16 +32,16 @@ export const mockData1: ScalePopupProps = {
     values: [
         {
             num: 0,
-            value: '3.500'
+            value: 3.500,
         }, {
             num: 1,
-            value: '2.500'
+            value: 2.500,
         }, {
             num: 2,
-            value: '1.500'
+            value: 1.500,
         }, {
             num: 3,
-            value: '0.500'
+            value: 0.500,
         }
     ],
 };
@@ -57,16 +57,16 @@ export const mockData2: ScalePopupProps = {
     values: [
         {
             num: 0,
-            value: '30.500'
+            value: 30.500,
         }, {
             num: 1,
-            value: '42.500'
+            value: 42.500,
         }, {
             num: 2,
-            value: '111.500'
+            value: 111.500,
         }, {
             num: 3,
-            value: '200.500'
+            value: 200.500,
         }
     ],
 };

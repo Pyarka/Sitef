@@ -23,7 +23,8 @@
     text-align: start;
     width: 100px;
 }
-.space {
+.space2 {
     width: 10px;
     height: 11px;
+    background-color: red;
 }

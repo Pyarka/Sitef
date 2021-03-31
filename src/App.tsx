@@ -1,5 +1,5 @@
 import React from 'react';
-import ScalePopup from "./Components/ScalePopup";
+import ScalePopup from "./Components/ScalePopup/ScalePopup";
 
 function App() {
   return (
