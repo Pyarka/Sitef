@@ -1,5 +1,6 @@
 import React, {ReactElement, useEffect, useState} from 'react';
 import {getNormalScale, getScaleRequest, ScalePopupProps, ValuesInterface} from './Helper';
+import NumberBox from "./NumberBox/NumberBox";
 
 const ScalePopup = (): ReactElement => {
     const [scale, setScale] = useState([] as string[]);
@@ -42,6 +43,7 @@ const ScalePopup = (): ReactElement => {
                 <div>редактирование</div>
             </div>
             <div>оранжевый блок с процентами</div>
+            <NumberBox onChange={(test) => console.log('on change =>', test)} value={15} onBlur={(test) => console.log('on blur => ', test )} />
             <div>
                 <div> k рук</div>
                 <div> k</div>
