@@ -16,14 +16,22 @@ const ScalePopup = (): ReactElement => {
     }, []);
     console.log('values => ', values);
     console.log('scale => ', scale);
+    const changeValue = (num:number, masValue:number) => {
+        //1. В массив Values 2. найти элемент у которого num равен индексу(num) 3. изменить значение элемента 4. отдать новый массив в ыуеМфдгуы
+        const newValues = values.map((valuesItem) => {
+            if (valuesItem.num != num) return valuesItem;
+            return {num, value: masValue};
+        })
+        setValues(newValues);
+    }
     const renderScale = (i: number) => <div>{scale[i]}</div>
     const renderValues = (i: number): ReactElement | null => {
         const useValue = values.find(({num}) => num === i);
-        if (!useValue || !useValue.value) return null
+        if (!useValue || !useValue.value) return null;
         return (
-            <NumberBox onChange={(test) => console.log('on change =>', test)}
+            <NumberBox onChange={(newValue) => changeValue(useValue.num, newValue)}
                        value={useValue.value}
-                       onBlur={(test) => console.log('on blur => ', test )}
+                       onBlur={(newValue) => changeValue(useValue.num, newValue)}
             />
         )
     }
