@@ -1,15 +1,29 @@
 .cellsContainer {
+    width: 210px;
+    box-shadow: 0 0 5px 1px rgb(0.0.0.0) ;
     display: flex;
     flex-direction: column;
-    text-align: end;
-    vertical-align: center;
 }
 .cellsRow {
-    width: 80px;
+    width: 150px;
+    height: 25px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 3px;
     margin-top: 3px;
+}
+.cellsScale {
+    color: #00a9bb;
+    text-align: end;
+    width: 15px;
+}
+.cellsValues {
+    text-align: start;
+    width: 100px;
+}
+.space {
+    width: 10px;
+    height: 11px;
 }
