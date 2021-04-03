@@ -1,9 +1,7 @@
 import React, {ReactElement, useEffect, useState} from 'react';
 import {getNormalScale, getScaleRequest, ScalePopupProps, ValuesInterface} from './Helper';
 import NumberBox from "../NumberBox/NumberBox";
-import ScaleStyle from "./ScalePopup";
-
-
+import { ScaleStyle, ToggleEdit } from "./ScalePopupStyles";
 
 const ScalePopup = (): ReactElement => {
     const [scale, setScale] = useState([] as string[]);
@@ -34,6 +32,7 @@ const ScalePopup = (): ReactElement => {
         newScale[num] = `${masScale}`;
         setScale(newScale);
     }
+
     const renderScale = (i: number): ReactElement => {
         // вернуть инпут  NumberBox со значением из массива scale по индексу i если isEditingScale
         if(isEditingScale){
@@ -51,6 +50,7 @@ const ScalePopup = (): ReactElement => {
             </ScaleStyle>
         );
     }
+
     const renderValues = (i: number): ReactElement | null => {
         const useValue = values.find(({num}) => num === i);
         if (!useValue || !useValue.value) return null;
@@ -71,6 +71,7 @@ const ScalePopup = (): ReactElement => {
                 </div>
             })
     }
+
     return (
         <div>
             <div>
@@ -78,7 +79,7 @@ const ScalePopup = (): ReactElement => {
                 <div>кнопка</div>
                 <div>переключатель вертик</div>
                 <div>селектор</div>
-                <div>редактирование</div>
+                <ToggleEdit onClick={() => setEditingScale(!isEditingScale)}/>
             </div>
             <div>оранжевый блок с процентами</div>
             <div>
