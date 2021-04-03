@@ -1,11 +1,14 @@
 import React, {ReactElement, useEffect, useState} from 'react';
 import {getNormalScale, getScaleRequest, ScalePopupProps, ValuesInterface} from './Helper';
 import NumberBox from "../NumberBox/NumberBox";
+import ScaleStyle from "./ScalePopup";
+
+
 
 const ScalePopup = (): ReactElement => {
     const [scale, setScale] = useState([] as string[]);
     const [values, setValues] = useState([] as ValuesInterface[]);
-    const [isEditingScale, setEditingScale] = useState(true);
+    const [isEditingScale, setEditingScale] = useState(false);
 
     useEffect(() => {
         getScaleRequest.then(({values, scale}: ScalePopupProps) => {
@@ -43,9 +46,9 @@ const ScalePopup = (): ReactElement => {
             )
         }
         return (
-            <div key={i}>
+            <ScaleStyle key={i}>
                 {scale[i]}
-            </div>
+            </ScaleStyle>
         );
     }
     const renderValues = (i: number): ReactElement | null => {

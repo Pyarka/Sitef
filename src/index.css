@@ -27,11 +27,7 @@ code {
   margin-bottom: 3px;
   margin-top: 3px;
 }
-.cellsScale {
-  color: #00a9bb;
-  text-align: end;
-  width: 15px;
-}
+
 .cellsValues {
   text-align: start;
   width: 100px;
