@@ -5,7 +5,7 @@ import NumberBox from "../NumberBox/NumberBox";
 const ScalePopup = (): ReactElement => {
     const [scale, setScale] = useState([] as string[]);
     const [values, setValues] = useState([] as ValuesInterface[]);
-    const [isEditingScale, setEditingScale] = useState(false);
+    const [isEditingScale, setEditingScale] = useState(true);
 
     useEffect(() => {
         getScaleRequest.then(({values, scale}: ScalePopupProps) => {
@@ -25,13 +25,25 @@ const ScalePopup = (): ReactElement => {
         })
         setValues(newValues);
     }
+
+    const changeScale = (masScale:number, num: number) => {
+        const newScale = [...scale];
+        newScale[num] = `${masScale}`;
+        setScale(newScale);
+    }
     const renderScale = (i: number): ReactElement => {
         // вернуть инпут  NumberBox со значением из массива scale по индексу i если isEditingScale
-        if(){
-            return <NumberBox />
+        if(isEditingScale){
+            return (
+                <NumberBox key={i}
+                           onChange={(newScale) => changeScale(newScale, i)}
+                           value={+scale[i]}
+                           onBlur={(newScale) => changeScale(newScale, i)}
+                />
+            )
         }
         return (
-            <div>
+            <div key={i}>
                 {scale[i]}
             </div>
         );
