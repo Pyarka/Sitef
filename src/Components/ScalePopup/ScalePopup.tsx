@@ -1,8 +1,22 @@
 import React, {ReactElement, useEffect, useState} from 'react';
 import {getNormalScale, getScaleRequest, ScalePopupProps, ValuesInterface} from './Helper';
 import NumberBox from "../NumberBox/NumberBox";
-import { ScaleStyle, ToggleEdit, ToggleSave, ToggleCancel, CellsContainer, CellsRow, CellsValues,
-    ToggleVertical, ToggleHorizontal} from "./ScalePopupStyles";
+import {
+    CellsContainer,
+    CellsRow,
+    CellsValues,
+    ScaleStyle,
+    ToggleBlock,
+    HeaderBlock,
+    ToggleCancel,
+    ToggleEdit,
+    ToggleHorizontal,
+    ToggleSave,
+    ToggleVertical,
+    ContainerVertical,
+    ContainerHorizontal,
+    CloseButton,
+} from "./ScalePopupStyles";
 
 const ScalePopup = (): ReactElement => {
     const [scale, setScale] = useState([] as string[]);
@@ -10,7 +24,6 @@ const ScalePopup = (): ReactElement => {
     const [isEditingScale, setEditingScale] = useState(false);
     const [isSavedScale, setSavedScale] = useState(false);
     const [isVertical, setVertical] = useState(true);
-    const [isHorizontal, setHorizontal] = useState(false);
 
 
     useEffect(() => {
@@ -22,8 +35,6 @@ const ScalePopup = (): ReactElement => {
         });
     }, []);
 
-    console.log('values => ', values);
-    console.log('scale => ', scale);
     const changeValue = (num:number, masValue:number) => {
         const newValues = values.map((valuesItem) => {
             if (valuesItem.num !== num) return valuesItem;
@@ -76,29 +87,72 @@ const ScalePopup = (): ReactElement => {
             })
     }
 
+    if (isVertical) {
+        return (
+            <ContainerVertical>
+                <HeaderBlock>
+                    <div>Обратный расчет</div>
+                    <div>кнопка</div>
+                    <div >переключатель вертик</div>
+                    <ToggleEdit onClick={() => setEditingScale(!isEditingScale)}/>
+                    <ToggleSave onClick={() => {
+                        if (!isSavedScale) {
+                            setSavedScale(!isSavedScale)
+                        }
+                        console.log("saved")
+                    }} />
+                    <ToggleCancel onClick={() => console.log ("canceled")}/>
+                    <ToggleBlock>
+                        <ToggleVertical onClick={() => {
+                            if (!isVertical) {
+                                setVertical(!isVertical)
+                            }
+                        }} />
+                        <ToggleHorizontal onClick={() => {
+                            if (isVertical) {
+                                setVertical(!isVertical)
+                            }
+                        }} />
+                    </ToggleBlock>
+                    <CloseButton />
+                </HeaderBlock>
+                <div>оранжевый блок с процентами</div>
+                <div>
+                    <div> k рук</div>
+                    <div> k</div>
+                    <CellsContainer>{renderCell()}</CellsContainer>
+                </div>
+            </ContainerVertical>
+        )
+    }
+
     return (
-        <div>
+        <ContainerHorizontal>
             <div>
                 <div>Обратный расчет</div>
                 <div>кнопка</div>
                 <div>переключатель вертик</div>
                 <div>селектор</div>
                 <ToggleEdit onClick={() => setEditingScale(!isEditingScale)}/>
-                <ToggleSave onClick={() =>
-                {if(!isSavedScale) {
-                setSavedScale(!isSavedScale)}
-                console.log ("saved")}}/>
+                <ToggleSave onClick={() => {
+                    if (!isSavedScale) {
+                        setSavedScale(!isSavedScale)
+                    }
+                    console.log("saved")
+                }} />
                 <ToggleCancel onClick={() => console.log ("canceled")}/>
-                <ToggleVertical onClick={() => {if(!isVertical) {
-                    setVertical(!isVertical)
-                    setHorizontal(!isHorizontal)
-                }
-                console.log ("vert")}}/>
-                <ToggleHorizontal onClick={() => {if(!isHorizontal) {
-                    setHorizontal(!isHorizontal)
-                    setVertical(!isVertical)
-                }
-                console.log ("horizon")}}/>
+                 <ToggleBlock>
+                     <ToggleVertical onClick={() => {
+                         if (!isVertical) {
+                             setVertical(!isVertical)
+                         }
+                     }} />
+                     <ToggleHorizontal onClick={() => {
+                         if (isVertical) {
+                             setVertical(!isVertical)
+                         }
+                     }} />
+                 </ToggleBlock>
             </div>
             <div>оранжевый блок с процентами</div>
             <div>
@@ -106,7 +160,7 @@ const ScalePopup = (): ReactElement => {
                 <div> k</div>
                 <CellsContainer>{renderCell()}</CellsContainer>
             </div>
-        </div>
+        </ContainerHorizontal>
     )
 }
 

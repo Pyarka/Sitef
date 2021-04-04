@@ -3,7 +3,7 @@ import ScalePopup from "./Components/ScalePopup/ScalePopup";
 
 function App() {
   return (
-    <div>
+    <div style={{display:'flex', justifyContent: 'center' }}>
       <ScalePopup />
     </div>
   );
