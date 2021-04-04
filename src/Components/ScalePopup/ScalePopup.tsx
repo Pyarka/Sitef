@@ -1,12 +1,13 @@
 import React, {ReactElement, useEffect, useState} from 'react';
 import {getNormalScale, getScaleRequest, ScalePopupProps, ValuesInterface} from './Helper';
 import NumberBox from "../NumberBox/NumberBox";
-import { ScaleStyle, ToggleEdit } from "./ScalePopupStyles";
+import { ScaleStyle, ToggleEdit, ToggleSave, ToggleCancel, CellsContainer, CellsRow, CellsValues, Space} from "./ScalePopupStyles";
 
 const ScalePopup = (): ReactElement => {
     const [scale, setScale] = useState([] as string[]);
     const [values, setValues] = useState([] as ValuesInterface[]);
     const [isEditingScale, setEditingScale] = useState(false);
+    const [isSavedScale, setSavedScale] = useState(false);
 
     useEffect(() => {
         getScaleRequest.then(({values, scale}: ScalePopupProps) => {
@@ -64,11 +65,11 @@ const ScalePopup = (): ReactElement => {
 
     const renderCell = () => {
         return scale.map((scaleItem, i) => {
-                return <div className={'cellsRow'} key={scaleItem}>
-                    <div className={'cellsScale'}>{renderScale(i)}</div>
-                    <div className={'space'}></div>
-                    <div className={'cellsValues'}>{renderValues(i)}</div>
-                </div>
+                return <CellsRow key={scaleItem}>
+                    <div>{renderScale(i)}</div>
+
+                    <CellsValues>{renderValues(i)}</CellsValues>
+                </CellsRow>
             })
     }
 
@@ -80,12 +81,17 @@ const ScalePopup = (): ReactElement => {
                 <div>переключатель вертик</div>
                 <div>селектор</div>
                 <ToggleEdit onClick={() => setEditingScale(!isEditingScale)}/>
+                <ToggleSave onClick={() =>
+                {if(!isSavedScale) {
+                setSavedScale(!isSavedScale)}
+                console.log ("saved")}}/>
+                <ToggleCancel onClick={() => console.log ("canceled")}/>
             </div>
             <div>оранжевый блок с процентами</div>
             <div>
                 <div> k рук</div>
                 <div> k</div>
-                <div className={'cellsContainer'}>{renderCell()}</div>
+                <CellsContainer>{renderCell()}</CellsContainer>
             </div>
         </div>
     )
