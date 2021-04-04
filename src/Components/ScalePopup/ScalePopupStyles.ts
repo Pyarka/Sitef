@@ -28,6 +28,22 @@ export const ToggleCancel = styled.div`
     background-color: red;
     border-radius: 50%;
 `;
+export const ToggleVertical = styled.div`
+    width: 30px;
+    height: 30px;
+    border: 10px;
+    border-radius: 50%;
+    border-color: green;
+    cursor: pointer;
+`;
+export const ToggleHorizontal = styled.div`
+    width: 30px;
+    height: 30px;
+    border: 5px;
+    border-radius: 50%;
+    border-color: blue;
+    cursor: pointer;
+`;
 export const CellsContainer = styled.div`
     width: 210px;
     box-shadow: 0 0 5px 1px rgb(0.0.0.0) ;
@@ -49,9 +65,5 @@ export const CellsValues = styled.div `
     width: 100px;
 `;
 
-export const Space = styled.div`
-    width: 10px;
-    height: 11px;
-`;
 
 

@@ -1,13 +1,17 @@
 import React, {ReactElement, useEffect, useState} from 'react';
 import {getNormalScale, getScaleRequest, ScalePopupProps, ValuesInterface} from './Helper';
 import NumberBox from "../NumberBox/NumberBox";
-import { ScaleStyle, ToggleEdit, ToggleSave, ToggleCancel, CellsContainer, CellsRow, CellsValues, Space} from "./ScalePopupStyles";
+import { ScaleStyle, ToggleEdit, ToggleSave, ToggleCancel, CellsContainer, CellsRow, CellsValues,
+    ToggleVertical, ToggleHorizontal} from "./ScalePopupStyles";
 
 const ScalePopup = (): ReactElement => {
     const [scale, setScale] = useState([] as string[]);
     const [values, setValues] = useState([] as ValuesInterface[]);
     const [isEditingScale, setEditingScale] = useState(false);
     const [isSavedScale, setSavedScale] = useState(false);
+    const [isVertical, setVertical] = useState(true);
+    const [isHorizontal, setHorizontal] = useState(false);
+
 
     useEffect(() => {
         getScaleRequest.then(({values, scale}: ScalePopupProps) => {
@@ -67,7 +71,6 @@ const ScalePopup = (): ReactElement => {
         return scale.map((scaleItem, i) => {
                 return <CellsRow key={scaleItem}>
                     <div>{renderScale(i)}</div>
-
                     <CellsValues>{renderValues(i)}</CellsValues>
                 </CellsRow>
             })
@@ -86,6 +89,16 @@ const ScalePopup = (): ReactElement => {
                 setSavedScale(!isSavedScale)}
                 console.log ("saved")}}/>
                 <ToggleCancel onClick={() => console.log ("canceled")}/>
+                <ToggleVertical onClick={() => {if(!isVertical) {
+                    setVertical(!isVertical)
+                    setHorizontal(!isHorizontal)
+                }
+                console.log ("vert")}}/>
+                <ToggleHorizontal onClick={() => {if(!isHorizontal) {
+                    setHorizontal(!isHorizontal)
+                    setVertical(!isVertical)
+                }
+                console.log ("horizon")}}/>
             </div>
             <div>оранжевый блок с процентами</div>
             <div>
