@@ -5,17 +5,19 @@ import {
     CellsContainer,
     CellsRow,
     CellsValues,
+    CloseButton,
+    ContainerHorizontal,
+    ContainerVertical,
+    HeaderBlock,
     ScaleStyle,
     ToggleBlock,
-    HeaderBlock,
+    ToggleBlockActive,
+    ToggleBlockNotActive,
     ToggleCancel,
     ToggleEdit,
     ToggleHorizontal,
     ToggleSave,
     ToggleVertical,
-    ContainerVertical,
-    ContainerHorizontal,
-    CloseButton,
 } from "./ScalePopupStyles";
 
 const ScalePopup = (): ReactElement => {
@@ -86,20 +88,32 @@ const ScalePopup = (): ReactElement => {
                 </CellsRow>
             })
     }
+    console.log('isVertical => ', isVertical);
     const renderToggleBlock = () => {
-        return(<ToggleBlock>
-            <div></div>
-            <ToggleVertical onClick={() => {
-                if (!isVertical) {
-                    setVertical(!isVertical)
-                }
-            }} />
-            <ToggleHorizontal onClick={() => {
-                if (isVertical) {
-                    setVertical(!isVertical)
-                }
-            }} />
-        </ToggleBlock>)
+        const renderActive = (action: () => void) => {
+            return <ToggleBlockActive onClick={() => action()} />
+        }
+        const renderNotActive = (action: () => void) => {
+            return <ToggleBlockNotActive onClick={() => action()} />
+        }
+        const toggle = (value: boolean) => {
+            setVertical(value);
+        }
+        return (
+            <ToggleBlock>
+                <ToggleVertical>
+                    {isVertical
+                        ? renderActive(() => toggle(isVertical))
+                        : renderNotActive(() => toggle(true))
+                    }
+                </ToggleVertical>
+                <ToggleHorizontal>
+                    {!isVertical
+                        ? renderActive(() => toggle(!isVertical))
+                        : renderNotActive(() => toggle(false))
+                    }
+                </ToggleHorizontal>
+            </ToggleBlock>)
     }
     if (isVertical) {
         return (

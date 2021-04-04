@@ -63,16 +63,16 @@ export const ToggleCancel = styled.div`
     border-radius: 50%;
 `;
 export const ToggleVertical = styled.div`
-    width: 30px;
-    height: 30px; 
-    background: url(${rectangleGrey}) center no-repeat;
-    cursor: pointer;
+    // width: 30px;
+    // height: 30px; 
+    // background: url(${rectangleGrey}) center no-repeat;
+    // cursor: pointer;
 `;
 export const ToggleHorizontal = styled.div`
-    width: 30px;
-    height: 30px;
-    background: url(${rectangleWhite}) center no-repeat;
-    cursor: pointer;
+    // width: 30px;
+    // height: 30px;
+    // background: url(${rectangleWhite}) center no-repeat;
+    // cursor: pointer;
 `;
 export const ToggleBlockActive = styled.div`
     width: 30px;
@@ -90,8 +90,6 @@ export const ToggleBlockNotActive = styled.div`
 `;
 export const ToggleBlock = styled.div`
     display: flex;
-    background: #00c9d8;
-    transform: rotate(90deg);
     border: 1px solid #ececec;
     cursor: pointer;
 `;

@@ -1,4 +1,5 @@
 import React from 'react';
+import Container from './NumberBoxStyles';
 
 interface NumberBoxProps {
     value: number;
@@ -8,11 +9,12 @@ interface NumberBoxProps {
 
 const NumberBox = ({value, onChange, onBlur}: NumberBoxProps) => {
     return (
-        <input className={'input'}
-               onChange={(e) => onChange(+e.target.value)}
-               onBlur={(e) => onBlur(+e.target.value)}
-               value={ value ? value : ''}
-        />
+        <Container>
+            <input onChange={(e) => onChange(+e.target.value)}
+                   onBlur={(e) => onBlur(+e.target.value)}
+                   value={ value ? value : ''}
+            />
+        </Container>
     );
 };
 
