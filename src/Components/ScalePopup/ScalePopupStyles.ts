@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import cross from '../../Assets/Images/cross.png';
 import crossActive from '../../Assets/Images/crossActive.png';
+import rectangleGrey from '../../Assets/Images/rectangleGrey.png';
+import rectangleWhite from '../../Assets/Images/rectangleWhite.png';
 
 export const ScaleStyle = styled.div`
   color: #00a9bb;
@@ -62,22 +64,34 @@ export const ToggleCancel = styled.div`
 `;
 export const ToggleVertical = styled.div`
     width: 30px;
-    height: 30px;
-    border: 10px;
-    border-radius: 50%;
-    border-color: green;
+    height: 30px; 
+    background: url(${rectangleGrey}) center no-repeat;
     cursor: pointer;
 `;
 export const ToggleHorizontal = styled.div`
     width: 30px;
     height: 30px;
-    border: 5px;
-    border-radius: 50%;
-    border-color: blue;
+    background: url(${rectangleWhite}) center no-repeat;
+    cursor: pointer;
+`;
+export const ToggleBlockActive = styled.div`
+    width: 30px;
+    height: 30px; 
+    background: #00c9d8 url(${rectangleWhite}) center no-repeat;
+    border: 1px solid #00a9bb;
+    cursor: pointer;
+`;
+export const ToggleBlockNotActive = styled.div`
+    width: 30px;
+    height: 30px;
+    background: url(${rectangleGrey}) center no-repeat;
+    border: 1px solid #ececec;
     cursor: pointer;
 `;
 export const ToggleBlock = styled.div`
     display: flex;
+    background: #00c9d8;
+    transform: rotate(90deg);
     border: 1px solid #ececec;
     cursor: pointer;
 `;

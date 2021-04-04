@@ -86,7 +86,21 @@ const ScalePopup = (): ReactElement => {
                 </CellsRow>
             })
     }
-
+    const renderToggleBlock = () => {
+        return(<ToggleBlock>
+            <div></div>
+            <ToggleVertical onClick={() => {
+                if (!isVertical) {
+                    setVertical(!isVertical)
+                }
+            }} />
+            <ToggleHorizontal onClick={() => {
+                if (isVertical) {
+                    setVertical(!isVertical)
+                }
+            }} />
+        </ToggleBlock>)
+    }
     if (isVertical) {
         return (
             <ContainerVertical>
@@ -102,18 +116,8 @@ const ScalePopup = (): ReactElement => {
                         console.log("saved")
                     }} />
                     <ToggleCancel onClick={() => console.log ("canceled")}/>
-                    <ToggleBlock>
-                        <ToggleVertical onClick={() => {
-                            if (!isVertical) {
-                                setVertical(!isVertical)
-                            }
-                        }} />
-                        <ToggleHorizontal onClick={() => {
-                            if (isVertical) {
-                                setVertical(!isVertical)
-                            }
-                        }} />
-                    </ToggleBlock>
+                    {renderToggleBlock()}
+
                     <CloseButton />
                 </HeaderBlock>
                 <div>оранжевый блок с процентами</div>
