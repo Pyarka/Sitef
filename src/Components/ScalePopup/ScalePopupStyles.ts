@@ -3,6 +3,8 @@ import cross from '../../Assets/Images/cross.png';
 import crossActive from '../../Assets/Images/crossActive.png';
 import rectangleGrey from '../../Assets/Images/rectangleGrey.png';
 import rectangleWhite from '../../Assets/Images/rectangleWhite.png';
+import edit from '../../Assets/Images/edit.png';
+import editActive from '../../Assets/Images/editActive.png';
 
 export const ScaleStyle = styled.div`
   color: #00a9bb;
@@ -15,13 +17,14 @@ export const ContainerVertical = styled.div`
     display: flex;
     flex-direction: column;
     flex-grow: 0;
-    width: 300px;
+    width: 500px;
     border: 1px solid;
 `;
 
 export const HeaderBlock = styled.div`
     display: flex;
     flex-direction: row;
+    width: auto;
 `;
 
 export const CloseButton = styled.div`
@@ -39,21 +42,25 @@ export const CloseButton = styled.div`
 export const ContainerHorizontal = styled.div`
   display: flex;
   width: auto;
+  height: autopx; 
 `;
 
 export const ToggleEdit = styled.div`
     cursor: pointer;
-    width: 30px;
-    height: 30px;
-    background-color: green;
-    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    flex-shrink: 0;
+    background: url(${edit};
+    &:hover {
+        background-image: url(${editActive});
+    }
 `;
 export const ToggleSave = styled.div`
     cursor: pointer;
     width: 30px;
     height: 30px;
-    background-color: blue;
-    border-radius: 50%;
+    
 `
 export const ToggleCancel = styled.div`
     cursor: pointer;
@@ -63,27 +70,29 @@ export const ToggleCancel = styled.div`
     border-radius: 50%;
 `;
 export const ToggleVertical = styled.div`
-    // width: 30px;
-    // height: 30px; 
-    // background: url(${rectangleGrey}) center no-repeat;
-    // cursor: pointer;
+    width: 40px;
+    height: 40px; 
+    background: url(${rectangleGrey}) center no-repeat;
+    cursor: pointer;
+    transform: rotate(90deg);
 `;
 export const ToggleHorizontal = styled.div`
-    // width: 30px;
-    // height: 30px;
-    // background: url(${rectangleWhite}) center no-repeat;
-    // cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background: url(${rectangleWhite}) center no-repeat;
+    cursor: pointer;
+    transform: rotate(90deg);
 `;
 export const ToggleBlockActive = styled.div`
-    width: 30px;
-    height: 30px; 
+    width: 40px;
+    height: 40px; 
     background: #00c9d8 url(${rectangleWhite}) center no-repeat;
     border: 1px solid #00a9bb;
     cursor: pointer;
 `;
 export const ToggleBlockNotActive = styled.div`
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background: url(${rectangleGrey}) center no-repeat;
     border: 1px solid #ececec;
     cursor: pointer;

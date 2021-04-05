@@ -121,7 +121,6 @@ const ScalePopup = (): ReactElement => {
                 <HeaderBlock>
                     <div>Обратный расчет</div>
                     <div>кнопка</div>
-                    <div >переключатель вертик</div>
                     <ToggleEdit onClick={() => setEditingScale(!isEditingScale)}/>
                     <ToggleSave onClick={() => {
                         if (!isSavedScale) {
@@ -149,7 +148,6 @@ const ScalePopup = (): ReactElement => {
             <div>
                 <div>Обратный расчет</div>
                 <div>кнопка</div>
-                <div>переключатель вертик</div>
                 <div>селектор</div>
                 <ToggleEdit onClick={() => setEditingScale(!isEditingScale)}/>
                 <ToggleSave onClick={() => {
