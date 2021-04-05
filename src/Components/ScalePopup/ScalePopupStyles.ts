@@ -41,9 +41,17 @@ export const CloseButton = styled.div`
 
 export const ContainerHorizontal = styled.div`
   display: flex;
-  width: auto;
-  height: autopx; 
 `;
+
+export const ScaleBody = styled.div`
+  display: flex;
+  flex-direction: column
+`;
+
+export const ScaleLine = styled.div`
+  display: flex;
+`;
+
 
 export const ToggleEdit = styled.div`
     cursor: pointer;

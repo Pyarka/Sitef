@@ -17,6 +17,8 @@ import {
     ToggleEdit,
     ToggleHorizontal,
     ToggleSave,
+    ScaleBody,
+    ScaleLine,
     ToggleVertical,
 } from "./ScalePopupStyles";
 
@@ -88,7 +90,7 @@ const ScalePopup = (): ReactElement => {
                 </CellsRow>
             })
     }
-    console.log('isVertical => ', isVertical);
+
     const renderToggleBlock = () => {
         const renderActive = (action: () => void) => {
             return <ToggleBlockActive onClick={() => action()} />
@@ -101,38 +103,41 @@ const ScalePopup = (): ReactElement => {
         }
         return (
             <ToggleBlock>
-                <ToggleVertical>
-                    {isVertical
-                        ? renderActive(() => toggle(isVertical))
-                        : renderNotActive(() => toggle(true))
-                    }
-                </ToggleVertical>
                 <ToggleHorizontal>
                     {!isVertical
                         ? renderActive(() => toggle(!isVertical))
                         : renderNotActive(() => toggle(false))
                     }
                 </ToggleHorizontal>
+                <ToggleVertical>
+                    {isVertical
+                        ? renderActive(() => toggle(isVertical))
+                        : renderNotActive(() => toggle(true))
+                    }
+                </ToggleVertical>
             </ToggleBlock>)
     }
+    const renderHeaderBlock = (): ReactElement => {
+        return <HeaderBlock>
+            <div>Обратный расчет</div>
+            <div>кнопка</div>
+            <ToggleEdit onClick={() => setEditingScale(!isEditingScale)}/>
+            <ToggleSave onClick={() => {
+                if (!isSavedScale) {
+                    setSavedScale(!isSavedScale)
+                }
+                console.log("saved")
+            }} />
+            <ToggleCancel onClick={() => console.log ("canceled")}/>
+            {renderToggleBlock()}
+            <CloseButton />
+        </HeaderBlock>
+    }
+
     if (isVertical) {
         return (
             <ContainerVertical>
-                <HeaderBlock>
-                    <div>Обратный расчет</div>
-                    <div>кнопка</div>
-                    <ToggleEdit onClick={() => setEditingScale(!isEditingScale)}/>
-                    <ToggleSave onClick={() => {
-                        if (!isSavedScale) {
-                            setSavedScale(!isSavedScale)
-                        }
-                        console.log("saved")
-                    }} />
-                    <ToggleCancel onClick={() => console.log ("canceled")}/>
-                    {renderToggleBlock()}
-
-                    <CloseButton />
-                </HeaderBlock>
+                {renderHeaderBlock()}
                 <div>оранжевый блок с процентами</div>
                 <div>
                     <div> k рук</div>
@@ -145,37 +150,15 @@ const ScalePopup = (): ReactElement => {
 
     return (
         <ContainerHorizontal>
-            <div>
-                <div>Обратный расчет</div>
-                <div>кнопка</div>
-                <div>селектор</div>
-                <ToggleEdit onClick={() => setEditingScale(!isEditingScale)}/>
-                <ToggleSave onClick={() => {
-                    if (!isSavedScale) {
-                        setSavedScale(!isSavedScale)
-                    }
-                    console.log("saved")
-                }} />
-                <ToggleCancel onClick={() => console.log ("canceled")}/>
-                 <ToggleBlock>
-                     <ToggleVertical onClick={() => {
-                         if (!isVertical) {
-                             setVertical(!isVertical)
-                         }
-                     }} />
-                     <ToggleHorizontal onClick={() => {
-                         if (isVertical) {
-                             setVertical(!isVertical)
-                         }
-                     }} />
-                 </ToggleBlock>
-            </div>
-            <div>оранжевый блок с процентами</div>
-            <div>
-                <div> k рук</div>
-                <div> k</div>
-                <CellsContainer>{renderCell()}</CellsContainer>
-            </div>
+            <div>Оранжевый блок</div>
+            <ScaleBody>
+                {renderHeaderBlock()}
+                <ScaleLine>
+                    <div> k рук</div>
+                    <div> k</div>
+                    <CellsContainer>{renderCell()}</CellsContainer>
+                </ScaleLine>
+            </ScaleBody>
         </ContainerHorizontal>
     )
 }
