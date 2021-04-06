@@ -78,7 +78,7 @@ export const ToggleEdit = styled.div`
     height: 20px;
     display: flex;
     flex-shrink: 0;
-    background: url(${edit};
+    background: url(${edit}) center no-repeat;
     &:hover {
         background-image: url(${editActive});
     }
