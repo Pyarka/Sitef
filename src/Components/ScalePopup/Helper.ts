@@ -22,12 +22,16 @@ export interface ScalePopupProps {
 
 export interface ScalePopupSaveEdit {
     deleted: number[]; // индексы удаленной шкалы
-    scale: number[]; // актуальная шкала
+    scale: string[]; // актуальная шкала
     scale_id: number;
     section: 'user' | 'department';
     values: {
         [key: number]: string;
     }
+}
+
+export const scaleSaving = (saveData: ScalePopupSaveEdit) => {
+    console.log("Data saved");
 }
 
 export const mockData1: ScalePopupProps = {
@@ -81,11 +85,21 @@ export const mockData2: ScalePopupProps = {
     ],
 };
 
+type ValueItem = {[key: number]: number};
+
+export const formatValuesBeforeSave = (values: ValuesInterface[]): ValueItem => {
+    const result: ValueItem = {};
+    values.forEach(({num, value}) => {
+        result[num] = value;
+    })
+    return result;
+}
+
 export const getNormalScale = (stringScale: string): string[] => stringScale.split(',')
     .map(x => x.replace(/([^\d]*)(\d*(\.\d{0,2})?)(.*)/, '$2'));
 
-export const getScaleRequest: Promise<ScalePopupProps> = new Promise((resolve)  => {
-        setTimeout(() => {
-            resolve(mockData2);
-        }, 300);
-    });
+export const getScaleRequest: Promise<ScalePopupProps> = new Promise((resolve) => {
+    setTimeout(() => {
+        resolve(mockData2);
+    }, 300);
+});

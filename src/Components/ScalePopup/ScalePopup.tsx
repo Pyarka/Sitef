@@ -1,5 +1,12 @@
 import React, {ReactElement, useEffect, useState} from 'react';
-import {getNormalScale, getScaleRequest, ScalePopupProps, ValuesInterface} from './Helper';
+import {
+    getNormalScale,
+    getScaleRequest,
+    ScalePopupProps,
+    ValuesInterface,
+    scaleSaving,
+    ScalePopupSaveEdit
+} from './Helper';
 import NumberBox from "../NumberBox/NumberBox";
 import {
     CellsContainer,
@@ -29,29 +36,46 @@ const ScalePopup = (): ReactElement => {
     const [isEditingScale, setEditingScale] = useState(false);
     const [isSavedScale, setSavedScale] = useState(false);
     const [isVertical, setVertical] = useState(false);
+    const [scaleId, setScaleId] = useState(0);
 
 
     useEffect(() => {
         getScaleRequest.then(({values, scale}: ScalePopupProps) => {
-             const newValues = values;
-             const newScale = scale.scale;
-             setScale(getNormalScale(newScale));
-             setValues(newValues);
+            const newValues = values;
+            const newScale = scale.scale;
+            const newScaleId = scale.id;
+            setScaleId(newScaleId);
+            setScale(getNormalScale(newScale));
+            setValues(newValues);
         });
     }, []);
 
-    const changeValue = (num:number, masValue:number) => {
+    const handleSave = () => {
+        const saveScale: ScalePopupSaveEdit = {
+            deleted: [], // индексы удаленной шкалы
+            scale: scale, // актуальная шкала
+            scale_id: scaleId,
+            section: 'user',
+            values: formatValuesBeforeSave(values),
+        }
+        scaleSaving(saveScale)
+        if (!isSavedScale) {
+            setSavedScale(!isSavedScale)
+        }
+    }
+
+    const changeValue = (num: number, masValue: number) => {
         const newValues = values.map((valuesItem) => {
             if (valuesItem.num !== num) return valuesItem;
             return {num, value: masValue};
         })
-        if(!values.find((item) => item.num === num)){
+        if (!values.find((item) => item.num === num)) {
             newValues.push({num, value: masValue})
         }
         setValues(newValues);
     }
 
-    const changeScale = (masScale:number, num: number) => {
+    const changeScale = (masScale: number, num: number) => {
         const newScale = [...scale];
         newScale[num] = `${masScale}`;
         setScale(newScale);
@@ -59,7 +83,7 @@ const ScalePopup = (): ReactElement => {
 
     const renderScale = (i: number): ReactElement => {
         // вернуть инпут  NumberBox со значением из массива scale по индексу i если isEditingScale
-        if(isEditingScale){
+        if (isEditingScale) {
             return (
                 <NumberBox key={i}
                            onChange={(newScale) => changeScale(newScale, i)}
@@ -76,7 +100,7 @@ const ScalePopup = (): ReactElement => {
     }
 
     const renderValues = (i: number): ReactElement | null => {
-        const {value, num} = values.find(({num}) => num === i) || {value:0, num: i};
+        const {value, num} = values.find(({num}) => num === i) || {value: 0, num: i};
         return (
             <NumberBox onChange={(newValue) => changeValue(num, newValue)}
                        value={value}
@@ -87,19 +111,19 @@ const ScalePopup = (): ReactElement => {
 
     const renderCell = () => {
         return scale.map((scaleItem, i) => {
-                return <CellsRow key={scaleItem} isVertical={isVertical}>
-                    <div>{renderScale(i)}</div>
-                    <CellsValues>{renderValues(i)}</CellsValues>
-                </CellsRow>
-            })
+            return <CellsRow key={scaleItem} isVertical={isVertical}>
+                <div>{renderScale(i)}</div>
+                <CellsValues>{renderValues(i)}</CellsValues>
+            </CellsRow>
+        })
     }
 
     const renderToggleBlock = () => {
         const renderActive = (action: () => void) => {
-            return <ToggleBlockActive onClick={() => action()} />
+            return <ToggleBlockActive onClick={() => action()}/>
         }
         const renderNotActive = (action: () => void) => {
-            return <ToggleBlockNotActive onClick={() => action()} />
+            return <ToggleBlockNotActive onClick={() => action()}/>
         }
         const toggle = (value: boolean) => {
             setVertical(value);
@@ -125,15 +149,10 @@ const ScalePopup = (): ReactElement => {
             <div>Обратный расчет</div>
             <div>кнопка</div>
             <ToggleEdit onClick={() => setEditingScale(!isEditingScale)}/>
-            <ToggleSave onClick={() => {
-                if (!isSavedScale) {
-                    setSavedScale(!isSavedScale)
-                }
-                console.log("saved")
-            }} />
-            <ToggleCancel onClick={() => console.log ("canceled")}/>
+            <ToggleSave onClick={() => handleSave()}/>
+            <ToggleCancel onClick={() => console.log("canceled")}/>
             {renderToggleBlock()}
-            <CloseButton />
+            <CloseButton/>
         </HeaderBlock>
     }
 
@@ -155,18 +174,18 @@ const ScalePopup = (): ReactElement => {
         <ContainerHorizontal>
             <OrangeBlockVertical>
                 %
-                <NumberBox value={0} onChange={() => console.log ("процент")} onBlur={() => console.log ("проценти")}/>
+                <NumberBox value={0} onChange={() => console.log("процент")} onBlur={() => console.log("проценти")}/>
             </OrangeBlockVertical>
             <ScaleBody>
                 {renderHeaderBlock()}
                 <ScaleLine>
                     <div>
                         k рук
-                        <NumberBox value={1} onChange={() => console.log('kruk')} onBlur={() => console.log('kruk')} />
+                        <NumberBox value={1} onChange={() => console.log('kruk')} onBlur={() => console.log('kruk')}/>
                     </div>
                     <div>
                         k
-                        <NumberBox value={1} onChange={() => console.log('k')} onBlur={() => console.log('k')} />
+                        <NumberBox value={1} onChange={() => console.log('k')} onBlur={() => console.log('k')}/>
                     </div>
                     <CellsContainer isVertical={isVertical}>{renderCell()}</CellsContainer>
                 </ScaleLine>
