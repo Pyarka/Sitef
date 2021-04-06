@@ -6,7 +6,6 @@ import rectangleWhite from '../../Assets/Images/rectangleWhite.png';
 import edit from '../../Assets/Images/edit.png';
 import editActive from '../../Assets/Images/editActive.png';
 
-
 export const ScaleStyle = styled.div`
   text-align: end;
   width: 15px;
@@ -41,6 +40,7 @@ export const CloseButton = styled.div`
 
 export const ContainerHorizontal = styled.div`
   display: flex;
+  flex-grow: 1;
 `;
 
 export const OrangeBlockVertical = styled.div`
@@ -62,9 +62,13 @@ export const ScaleBody = styled.div`
 `;
 
 export const ScaleLine = styled.div`
-  display: flex;
-  flex-direction: row;
-  color: blue;
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    align-items: center;
+    color: #00a9bb;
+    height: 70px;
+    font-weight: bold;
 `;
 
 
@@ -128,21 +132,20 @@ export const ToggleBlock = styled.div`
 export const CellsContainer = styled.div`
     width: 210px;
     display: flex;
-    flex-direction: column;
+    flex-direction: ${({isVertical}: {isVertical: boolean}) => !isVertical ? "row" : "column"};
 `;
 export const CellsRow = styled.div`
     width: 150px;
     height: 25px;
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-direction: ${({isVertical}: {isVertical: boolean}) => isVertical ? "row" : "column"};
+    align-items: center;
     justify-content: center;
     margin-bottom: 3px;
     margin-top: 3px;
 `;
 export const CellsValues = styled.div`
-    text-align: start;
-    width: 100px;
+   
 `;
 
 

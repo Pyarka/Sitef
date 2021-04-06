@@ -45,6 +45,9 @@ const ScalePopup = (): ReactElement => {
             if (valuesItem.num !== num) return valuesItem;
             return {num, value: masValue};
         })
+        if(!values.find((item) => item.num === num)){
+            newValues.push({num, value: masValue})
+        }
         setValues(newValues);
     }
 
@@ -73,19 +76,18 @@ const ScalePopup = (): ReactElement => {
     }
 
     const renderValues = (i: number): ReactElement | null => {
-        const useValue = values.find(({num}) => num === i);
-        if (!useValue || !useValue.value) return null;
+        const {value, num} = values.find(({num}) => num === i) || {value:0, num: i};
         return (
-            <NumberBox onChange={(newValue) => changeValue(useValue.num, newValue)}
-                       value={useValue.value}
-                       onBlur={(newValue) => changeValue(useValue.num, newValue)}
+            <NumberBox onChange={(newValue) => changeValue(num, newValue)}
+                       value={value}
+                       onBlur={(newValue) => changeValue(num, newValue)}
             />
         )
     }
 
     const renderCell = () => {
         return scale.map((scaleItem, i) => {
-                return <CellsRow key={scaleItem}>
+                return <CellsRow key={scaleItem} isVertical={isVertical}>
                     <div>{renderScale(i)}</div>
                     <CellsValues>{renderValues(i)}</CellsValues>
                 </CellsRow>
@@ -143,7 +145,7 @@ const ScalePopup = (): ReactElement => {
                 <div>
                     <div> k рук</div>
                     <div> k</div>
-                    <CellsContainer>{renderCell()}</CellsContainer>
+                    <CellsContainer isVertical={isVertical}>{renderCell()}</CellsContainer>
                 </div>
             </ContainerVertical>
         )
@@ -158,9 +160,15 @@ const ScalePopup = (): ReactElement => {
             <ScaleBody>
                 {renderHeaderBlock()}
                 <ScaleLine>
-                    <div> k рук</div>
-                    <div> k</div>
-                    <CellsContainer>{renderCell()}</CellsContainer>
+                    <div>
+                        k рук
+                        <NumberBox value={1} onChange={() => console.log('kruk')} onBlur={() => console.log('kruk')} />
+                    </div>
+                    <div>
+                        k
+                        <NumberBox value={1} onChange={() => console.log('k')} onBlur={() => console.log('k')} />
+                    </div>
+                    <CellsContainer isVertical={isVertical}>{renderCell()}</CellsContainer>
                 </ScaleLine>
             </ScaleBody>
         </ContainerHorizontal>

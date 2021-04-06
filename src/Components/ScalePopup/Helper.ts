@@ -20,6 +20,16 @@ export interface ScalePopupProps {
     values: ValuesInterface[];
 }
 
+export interface ScalePopupSaveEdit {
+    deleted: number[]; // индексы удаленной шкалы
+    scale: number[]; // актуальная шкала
+    scale_id: number;
+    section: 'user' | 'department';
+    values: {
+        [key: number]: string;
+    }
+}
+
 export const mockData1: ScalePopupProps = {
     scale: {
         helper_id: 6,
