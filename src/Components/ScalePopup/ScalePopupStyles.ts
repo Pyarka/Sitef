@@ -1,4 +1,4 @@
-import styled from "styled-components";
+﻿import styled from "styled-components";
 import cross from '../../Assets/Images/cross.png';
 import crossActive from '../../Assets/Images/crossActive.png';
 import rectangleGrey from '../../Assets/Images/rectangleGrey.png';
@@ -6,8 +6,8 @@ import rectangleWhite from '../../Assets/Images/rectangleWhite.png';
 import edit from '../../Assets/Images/edit.png';
 import editActive from '../../Assets/Images/editActive.png';
 
+
 export const ScaleStyle = styled.div`
-  color: #00a9bb;
   text-align: end;
   width: 15px;
   padding: 0 10px 0 0;
@@ -43,6 +43,19 @@ export const ContainerHorizontal = styled.div`
   display: flex;
 `;
 
+export const OrangeBlockVertical = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 66px;
+    background-color: #ffbe79;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    justify-content: flex-end;
+    align-items: center;
+    font-weight: bold;
+    font-size: 22px;
+`;
+
 export const ScaleBody = styled.div`
   display: flex;
   flex-direction: column
@@ -50,6 +63,8 @@ export const ScaleBody = styled.div`
 
 export const ScaleLine = styled.div`
   display: flex;
+  flex-direction: row;
+  color: blue;
 `;
 
 
@@ -112,7 +127,6 @@ export const ToggleBlock = styled.div`
 `;
 export const CellsContainer = styled.div`
     width: 210px;
-    box-shadow: 0 0 5px 1px rgb(0.0.0.0) ;
     display: flex;
     flex-direction: column;
 `;

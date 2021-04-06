@@ -20,6 +20,7 @@ import {
     ScaleBody,
     ScaleLine,
     ToggleVertical,
+    OrangeBlockVertical,
 } from "./ScalePopupStyles";
 
 const ScalePopup = (): ReactElement => {
@@ -27,7 +28,7 @@ const ScalePopup = (): ReactElement => {
     const [values, setValues] = useState([] as ValuesInterface[]);
     const [isEditingScale, setEditingScale] = useState(false);
     const [isSavedScale, setSavedScale] = useState(false);
-    const [isVertical, setVertical] = useState(true);
+    const [isVertical, setVertical] = useState(false);
 
 
     useEffect(() => {
@@ -147,10 +148,13 @@ const ScalePopup = (): ReactElement => {
             </ContainerVertical>
         )
     }
-
+//ScaleLine height 5px, отступы слева как справа Container
     return (
         <ContainerHorizontal>
-            <div>Оранжевый блок</div>
+            <OrangeBlockVertical>
+                %
+                <NumberBox value={0} onChange={() => console.log ("процент")} onBlur={() => console.log ("проценти")}/>
+            </OrangeBlockVertical>
             <ScaleBody>
                 {renderHeaderBlock()}
                 <ScaleLine>
