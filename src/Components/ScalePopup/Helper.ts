@@ -98,8 +98,12 @@ export const formatValuesBeforeSave = (values: ValuesInterface[]): ValueItem => 
 export const getNormalScale = (stringScale: string): string[] => stringScale.split(',')
     .map(x => x.replace(/([^\d]*)(\d*(\.\d{0,2})?)(.*)/, '$2'));
 
-export const getScaleRequest: Promise<ScalePopupProps> = new Promise((resolve) => {
-    setTimeout(() => {
-        resolve(mockData2);
-    }, 300);
-});
+export const getScaleRequest = (idScale: number): Promise<ScalePopupProps> => {
+    let result = mockData2;
+    if (result.scale.id === idScale) result = mockData1;
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(result);
+        }, 300);
+    });
+}

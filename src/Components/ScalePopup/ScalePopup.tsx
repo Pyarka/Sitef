@@ -29,6 +29,7 @@ import {
     ScaleLine,
     ToggleVertical,
     OrangeBlockVertical,
+    ChangeScaleDiv,
 } from "./ScalePopupStyles";
 
 const ScalePopup = (): ReactElement => {
@@ -39,9 +40,8 @@ const ScalePopup = (): ReactElement => {
     const [isVertical, setVertical] = useState(false);
     const [scaleId, setScaleId] = useState(0);
 
-
-    useEffect(() => {
-        getScaleRequest.then(({values, scale}: ScalePopupProps) => {
+    const getData = () => {
+        getScaleRequest(scaleId).then(({values, scale}: ScalePopupProps) => {
             const newValues = values;
             const newScale = scale.scale;
             const newScaleId = scale.id;
@@ -49,6 +49,10 @@ const ScalePopup = (): ReactElement => {
             setScale(getNormalScale(newScale));
             setValues(newValues);
         });
+    }
+
+    useEffect(() => {
+        getData();
     }, []);
 
     const handleSave = () => {
@@ -121,7 +125,7 @@ const ScalePopup = (): ReactElement => {
 
     const renderToggleBlock = () => {
         const renderActive = (action: () => void) => {
-            return <ToggleBlockActive onClick={() => action()}/>
+            return <ToggleBlockActive rotation={90} onClick={() => action()}/>
         }
         const renderNotActive = (action: () => void) => {
             return <ToggleBlockNotActive onClick={() => action()}/>
@@ -133,7 +137,7 @@ const ScalePopup = (): ReactElement => {
             <ToggleBlock>
                 <ToggleHorizontal>
                     {!isVertical
-                        ? renderActive(() => toggle(!isVertical))
+                        ? renderActive(() => toggle(isVertical))
                         : renderNotActive(() => toggle(false))
                     }
                 </ToggleHorizontal>
@@ -145,17 +149,20 @@ const ScalePopup = (): ReactElement => {
                 </ToggleVertical>
             </ToggleBlock>)
     }
-    const renderFooter = () => {
-        return (
-            <Footer>
-                <Save onClick={() => handleSave()}> Сохранить </Save>
-                <Cancel onClick={() => console.log("canceled")}> Отмена </Cancel>
-            </Footer>
-        )
+    const renderFooter = (): ReactElement | null => {
+        if(isEditingScale) {
+            return (
+                <Footer>
+                    <Save onClick={() => handleSave()}> Сохранить </Save>
+                    <Cancel onClick={() => console.log("canceled")}> Отмена </Cancel>
+                </Footer>
+            )
+        }
+        return null;
     }
     const renderHeaderBlock = (): ReactElement => {
         return <HeaderBlock>
-            <div>Обратный расчет</div>
+            <ChangeScaleDiv onClick={() => getData()}>Сменить шкалу</ChangeScaleDiv>
             <div>кнопка</div>
             <ToggleEdit onClick={() => setEditingScale(!isEditingScale)}/>
             {renderToggleBlock()}

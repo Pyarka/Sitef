@@ -84,6 +84,18 @@ export const ToggleEdit = styled.div`
         background-image: url(${editActive});
     }
 `;
+
+export const ChangeScaleDiv = styled.div `
+    display: flex;
+    cursor: pointer;
+    border-radius: 5px;
+    background: cyan;
+    border: 1px solid;
+    padding; 5px 10px;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+`;
 export const Save = styled.div`
     cursor: pointer;
     width: 150px;
@@ -128,16 +140,17 @@ export const Footer = styled.div`
 export const ToggleVertical = styled.div`
     width: 40px;
     height: 40px; 
-    background: url(${rectangleGrey}) center no-repeat;
+    
     cursor: pointer;
-    transform: rotate(90deg);
+    
 `;
 export const ToggleHorizontal = styled.div`
     width: 40px;
     height: 40px;
-    background: url(${rectangleWhite}) center no-repeat;
-    cursor: pointer;
+    
     transform: rotate(90deg);
+    cursor: pointer;
+    
 `;
 export const ToggleBlockActive = styled.div`
     width: 40px;
@@ -145,6 +158,7 @@ export const ToggleBlockActive = styled.div`
     background: #00c9d8 url(${rectangleWhite}) center no-repeat;
     border: 1px solid #00a9bb;
     cursor: pointer;
+    transform: ${({rotation}: {rotation: number}) => `rotate(${rotation}deg)`}
 `;
 export const ToggleBlockNotActive = styled.div`
     width: 40px;
