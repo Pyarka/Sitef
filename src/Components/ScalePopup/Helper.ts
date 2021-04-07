@@ -26,7 +26,7 @@ export interface ScalePopupSaveEdit {
     scale_id: number;
     section: 'user' | 'department';
     values: {
-        [key: number]: string;
+        [key: number]: number;
     }
 }
 

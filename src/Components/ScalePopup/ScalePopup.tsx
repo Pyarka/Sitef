@@ -5,12 +5,13 @@ import {
     ScalePopupProps,
     ValuesInterface,
     scaleSaving,
-    ScalePopupSaveEdit
+    ScalePopupSaveEdit, formatValuesBeforeSave
 } from './Helper';
 import NumberBox from "../NumberBox/NumberBox";
 import {
     CellsContainer,
     CellsRow,
+    Footer,
     CellsValues,
     CloseButton,
     ContainerHorizontal,
@@ -20,10 +21,10 @@ import {
     ToggleBlock,
     ToggleBlockActive,
     ToggleBlockNotActive,
-    ToggleCancel,
+    Cancel,
     ToggleEdit,
     ToggleHorizontal,
-    ToggleSave,
+    Save,
     ScaleBody,
     ScaleLine,
     ToggleVertical,
@@ -144,13 +145,19 @@ const ScalePopup = (): ReactElement => {
                 </ToggleVertical>
             </ToggleBlock>)
     }
+    const renderFooter = () => {
+        return (
+            <Footer>
+                <Save onClick={() => handleSave()}> Сохранить </Save>
+                <Cancel onClick={() => console.log("canceled")}> Отмена </Cancel>
+            </Footer>
+        )
+    }
     const renderHeaderBlock = (): ReactElement => {
         return <HeaderBlock>
             <div>Обратный расчет</div>
             <div>кнопка</div>
             <ToggleEdit onClick={() => setEditingScale(!isEditingScale)}/>
-            <ToggleSave onClick={() => handleSave()}/>
-            <ToggleCancel onClick={() => console.log("canceled")}/>
             {renderToggleBlock()}
             <CloseButton/>
         </HeaderBlock>
@@ -178,17 +185,18 @@ const ScalePopup = (): ReactElement => {
             </OrangeBlockVertical>
             <ScaleBody>
                 {renderHeaderBlock()}
-                <ScaleLine>
-                    <div>
+                <ScaleLine maxWidth={(scale.length+2)*58}>
+                    <CellsRow isVertical={isVertical}>
                         k рук
                         <NumberBox value={1} onChange={() => console.log('kruk')} onBlur={() => console.log('kruk')}/>
-                    </div>
-                    <div>
+                    </CellsRow>
+                    <CellsRow isVertical={isVertical}>
                         k
                         <NumberBox value={1} onChange={() => console.log('k')} onBlur={() => console.log('k')}/>
-                    </div>
+                    </CellsRow>
                     <CellsContainer isVertical={isVertical}>{renderCell()}</CellsContainer>
                 </ScaleLine>
+                {renderFooter()}
             </ScaleBody>
         </ContainerHorizontal>
     )

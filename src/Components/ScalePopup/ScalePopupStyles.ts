@@ -40,7 +40,6 @@ export const CloseButton = styled.div`
 
 export const ContainerHorizontal = styled.div`
   display: flex;
-  flex-grow: 1;
 `;
 
 export const OrangeBlockVertical = styled.div`
@@ -58,13 +57,15 @@ export const OrangeBlockVertical = styled.div`
 
 export const ScaleBody = styled.div`
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 `;
 
 export const ScaleLine = styled.div`
     display: flex;
     flex-direction: row;
     font-size: 16px;
+    max-width: ${({maxWidth}: {maxWidth: number}) => `${maxWidth}px`};
+    min-width: ${({maxWidth}: {maxWidth: number}) => `${maxWidth}px`};
     align-items: center;
     color: #00a9bb;
     height: 70px;
@@ -83,18 +84,46 @@ export const ToggleEdit = styled.div`
         background-image: url(${editActive});
     }
 `;
-export const ToggleSave = styled.div`
+export const Save = styled.div`
     cursor: pointer;
-    width: 30px;
+    width: 150px;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
     height: 30px;
-    
+    line-height: 30px;
+    margin: 10px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: #91c552;
+    &:hover{
+        background-color: #9fda5f;
+    }
 `
-export const ToggleCancel = styled.div`
+export const Cancel = styled.div`
     cursor: pointer;
-    width: 30px;
+    width: 150px;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
     height: 30px;
-    background-color: red;
-    border-radius: 50%;
+    line-height: 30px;
+    margin: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: #f56060;
+    &:hover{
+        background-color: #ff6d6d;
+    }
+`;
+export const Footer = styled.div`
+    display: flex;
+    margin-left: auto;
 `;
 export const ToggleVertical = styled.div`
     width: 40px;
@@ -138,6 +167,9 @@ export const CellsRow = styled.div`
     width: 150px;
     height: 25px;
     display: flex;
+    flex-grow: 0;
+    margin: 5px;
+    width: auto;
     flex-direction: ${({isVertical}: {isVertical: boolean}) => isVertical ? "row" : "column"};
     align-items: center;
     justify-content: center;
