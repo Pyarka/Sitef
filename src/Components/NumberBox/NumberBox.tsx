@@ -12,7 +12,7 @@ const NumberBox = ({value, onChange, onBlur}: NumberBoxProps) => {
         <Container>
             <input onChange={(e) => onChange(+e.target.value)}
                    onBlur={(e) => onBlur(+e.target.value)}
-                   value={ value ? value : ''}
+                   value={ value ? value : '0'}
             />
         </Container>
     );

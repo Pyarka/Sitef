@@ -130,7 +130,7 @@ const ScalePopup = (): ReactElement => {
 
     const renderCell = () => {
         return scale.map((scaleItem, i) => {
-            return <CellsRow key={scaleItem} isVertical={isVertical}>
+            return <CellsRow key={scaleItem+i} isVertical={isVertical}>
                 <div>{renderScale(i)}</div>
                 <CellsValues>{renderValues(i)}</CellsValues>
             </CellsRow>
