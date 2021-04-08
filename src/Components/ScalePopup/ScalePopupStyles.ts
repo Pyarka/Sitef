@@ -5,6 +5,7 @@ import rectangleGrey from '../../Assets/Images/rectangleGrey.png';
 import rectangleWhite from '../../Assets/Images/rectangleWhite.png';
 import edit from '../../Assets/Images/edit.png';
 import editActive from '../../Assets/Images/editActive.png';
+import plus from '../../Assets/Images/plusWhite.png';
 
 export const ScaleStyle = styled.div`
   text-align: end;
@@ -61,7 +62,7 @@ export const OrangeBlockHorizontal = styled.div`
     background-color: #ffbe79;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     font-weight: bold;
     font-size: 22px;
@@ -83,7 +84,18 @@ export const ScaleLine = styled.div`
     height: 70px;
     font-weight: bold;
 `;
-
+export const PlusButton = styled.div`
+    display: flex;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: #91c552 url(${plus}) center no-repeat;
+    cursor: pointer;
+    align-self: center;
+    &:hover{
+        background-color: #9fda5f;
+    }
+`;
 
 export const ToggleEdit = styled.div`
     cursor: pointer;

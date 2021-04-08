@@ -15,6 +15,7 @@ import {
     OrangeBlockHorizontal,
     CellsValues,
     CloseButton,
+    PlusButton,
     ContainerHorizontal,
     ContainerVertical,
     HeaderBlock,
@@ -87,7 +88,15 @@ const ScalePopup = (): ReactElement => {
         setScale(newScale);
     }
 
-    const renderScale = (i: number): ReactElement => {
+    const addScaleItem = () => {
+        const newScale = [...scale];
+        newScale.push('');
+        setScale(newScale);
+        const newValues = [...values];
+        newValues.push({num: newValues.length, value: 0})
+    }
+
+    const renderScale = (i: number): ReactElement | null => {
         // вернуть инпут  NumberBox со значением из массива scale по индексу i если isEditingScale
         if (isEditingScale) {
             return (
@@ -98,6 +107,9 @@ const ScalePopup = (): ReactElement => {
                 />
             )
         }
+        if(scale[i] === '') {
+            return null;
+        }
         return (
             <ScaleStyle key={i}>
                 {scale[i]}
@@ -107,6 +119,7 @@ const ScalePopup = (): ReactElement => {
 
     const renderValues = (i: number): ReactElement | null => {
         const {value, num} = values.find(({num}) => num === i) || {value: 0, num: i};
+        if(!isEditingScale && scale[i] === '') return null;
         return (
             <NumberBox onChange={(newValue) => changeValue(num, newValue)}
                        value={value}
@@ -122,6 +135,15 @@ const ScalePopup = (): ReactElement => {
                 <CellsValues>{renderValues(i)}</CellsValues>
             </CellsRow>
         })
+    }
+
+    const renderPlus = (): ReactElement | null => {
+        if (isEditingScale) {
+            return (
+                <PlusButton onClick={() => addScaleItem()}/>
+            )
+        }
+        return null;
     }
 
     const renderToggleBlock = () => {
@@ -207,8 +229,10 @@ const ScalePopup = (): ReactElement => {
                     </CellsRow>
                     <CellsContainer isVertical={isVertical}>{renderCell()}</CellsContainer>
                 </ScaleLine>
+
                 {renderFooter()}
             </ScaleBody>
+            {renderPlus()}
         </ContainerHorizontal>
     )
 }
