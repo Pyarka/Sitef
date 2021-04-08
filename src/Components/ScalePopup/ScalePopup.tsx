@@ -12,6 +12,7 @@ import {
     CellsContainer,
     CellsRow,
     Footer,
+    OrangeBlockHorizontal,
     CellsValues,
     CloseButton,
     ContainerHorizontal,
@@ -174,7 +175,10 @@ const ScalePopup = (): ReactElement => {
         return (
             <ContainerVertical>
                 {renderHeaderBlock()}
-                <div>оранжевый блок с процентами</div>
+                <OrangeBlockHorizontal>
+                    %
+                    <NumberBox value={0} onChange={() => console.log("процент")} onBlur={() => console.log("проценти")}/>
+                </OrangeBlockHorizontal>
                 <div>
                     <div> k рук</div>
                     <div> k</div>

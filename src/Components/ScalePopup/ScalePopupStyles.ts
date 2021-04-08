@@ -16,7 +16,7 @@ export const ContainerVertical = styled.div`
     display: flex;
     flex-direction: column;
     flex-grow: 0;
-    width: 500px;
+    width: 250px;
     border: 1px solid;
 `;
 
@@ -50,6 +50,18 @@ export const OrangeBlockVertical = styled.div`
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     justify-content: flex-end;
+    align-items: center;
+    font-weight: bold;
+    font-size: 22px;
+`;
+export const OrangeBlockHorizontal = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    background-color: #ffbe79;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    justify-content: space-between;
     align-items: center;
     font-weight: bold;
     font-size: 22px;
@@ -152,6 +164,7 @@ export const ToggleHorizontal = styled.div`
     cursor: pointer;
     
 `;
+
 export const ToggleBlockActive = styled.div`
     width: 40px;
     height: 40px; 
