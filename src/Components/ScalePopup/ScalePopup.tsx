@@ -58,6 +58,15 @@ const ScalePopup = (): ReactElement => {
     }, []);
 
     const handleSave = () => {
+        let i = scale.length - 1;
+        do {
+            i = i - 1;
+            if(scale[i] === '0') {
+                if(scale[i-1] === '0') {
+                    scale.splice(i);
+                }
+            }
+        } while(i !== 0)
         const saveScale: ScalePopupSaveEdit = {
             deleted: [], // индексы удаленной шкалы
             scale: scale, // актуальная шкала
@@ -70,6 +79,9 @@ const ScalePopup = (): ReactElement => {
             setSavedScale(!isSavedScale)
         }
     }
+
+
+
 
     const changeValue = (num: number, masValue: number) => {
         const newValues = values.map((valuesItem) => {
@@ -209,7 +221,6 @@ const ScalePopup = (): ReactElement => {
             </ContainerVertical>
         )
     }
-//ScaleLine height 5px, отступы слева как справа Container
     return (
         <ContainerHorizontal>
             <OrangeBlockVertical>
