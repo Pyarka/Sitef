@@ -9,10 +9,10 @@ export interface ScalePopupProps {
         id: number;
         limit_minPercent?: string;
         limit_minRate?: string;
-        limit_percent?: string;
-        limit_rate?: string;
-        rate: string;
-        rate_head: string;
+        limit_percent: number; //максимальный процент
+        limit_rate: number; // максимальный коэффициент
+        rate: number; // k
+        rate_head: number; // k рук
         rate_planning?: string;
         scale: string;
         type_calc: number;
@@ -38,8 +38,10 @@ export const mockData1: ScalePopupProps = {
     scale: {
         helper_id: 6,
         id: 502413,
-        rate: '1.25',
-        rate_head: '1.00',
+        rate: 1.25,
+        rate_head: 1.00,
+        limit_percent: 100,
+        limit_rate: 1.2,
         scale: '["1500000","1000000","500000","100000","0"]',
         type_calc: 0,
     },
@@ -63,8 +65,10 @@ export const mockData2: ScalePopupProps = {
     scale: {
         helper_id: 7,
         id: 502414,
-        rate: '0.25',
-        rate_head: '1.20',
+        rate: 2.25,
+        rate_head: 2.00,
+        limit_percent: 80,
+        limit_rate: 2.7,
         scale: '["5","7","9","11","15"]',
         type_calc: 1,
     },
