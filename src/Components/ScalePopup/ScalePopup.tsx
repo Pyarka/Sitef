@@ -38,7 +38,6 @@ const ScalePopup = (): ReactElement => {
     const [scale, setScale] = useState([] as string[]);
     const [values, setValues] = useState([] as ValuesInterface[]);
     const [isEditingScale, setEditingScale] = useState(false);
-    const [isSavedScale, setSavedScale] = useState(false);
     const [isVertical, setVertical] = useState(false);
     const [scaleId, setScaleId] = useState(0);
 
@@ -58,26 +57,26 @@ const ScalePopup = (): ReactElement => {
     }, []);
 
     const handleSave = () => {
-        let i = scale.length - 1;
+        const newScale = [...scale];
+        let i = scale.length;
         do {
             i = i - 1;
             if(scale[i] === '0') {
                 if(scale[i-1] === '0') {
-                    scale.splice(i);
+                    newScale.splice(i,1);
                 }
             }
         } while(i !== 0)
         const saveScale: ScalePopupSaveEdit = {
             deleted: [], // индексы удаленной шкалы
-            scale: scale, // актуальная шкала
+            scale: newScale, // актуальная шкала
             scale_id: scaleId,
             section: 'user',
             values: formatValuesBeforeSave(values),
         }
-        scaleSaving(saveScale)
-        if (!isSavedScale) {
-            setSavedScale(!isSavedScale)
-        }
+        scaleSaving(saveScale);
+        setScale(newScale);
+        setEditingScale(false);
     }
 
 
@@ -102,7 +101,7 @@ const ScalePopup = (): ReactElement => {
 
     const addScaleItem = () => {
         const newScale = [...scale];
-        newScale.push('');
+        newScale.push('0');
         setScale(newScale);
         const newValues = [...values];
         newValues.push({num: newValues.length, value: 0})
@@ -112,8 +111,7 @@ const ScalePopup = (): ReactElement => {
         // вернуть инпут  NumberBox со значением из массива scale по индексу i если isEditingScale
         if (isEditingScale) {
             return (
-                <NumberBox key={i}
-                           onChange={(newScale) => changeScale(newScale, i)}
+                <NumberBox onChange={(newScale) => changeScale(newScale, i)}
                            value={+scale[i]}
                            onBlur={(newScale) => changeScale(newScale, i)}
                 />
@@ -139,10 +137,10 @@ const ScalePopup = (): ReactElement => {
             />
         )
     }
-
+    const test = ['a','b','c','d','e','f','g','h'];
     const renderCell = () => {
         return scale.map((scaleItem, i) => {
-            return <CellsRow key={scaleItem+i} isVertical={isVertical}>
+            return <CellsRow key={test[i]} isVertical={isVertical}>
                 <div>{renderScale(i)}</div>
                 <CellsValues>{renderValues(i)}</CellsValues>
             </CellsRow>
