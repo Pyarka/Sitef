@@ -32,6 +32,7 @@ export const CloseButton = styled.div`
     width: 11px;
     display: flex;
     flex-shrink: 0;
+    align-self: end;
     background-image: url(${cross});
     cursor: pointer;
      &:hover {
@@ -66,6 +67,28 @@ export const OrangeBlockHorizontal = styled.div`
     align-items: center;
     font-weight: bold;
     font-size: 22px;
+`;
+
+export const OrangeNumbersBlock = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 66px;
+    color: #ffbe79;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 16px;
+    padding: 0 0 10px 0;
+    border: 1px solid;
+`;
+
+export const BLockPercent = styled.div`
+   margin: 2px;
+`;
+
+export const BLockRate = styled.div`
+   margin: 2px;
 `;
 
 export const ScaleBody = styled.div`
@@ -120,6 +143,22 @@ export const ChangeScaleDiv = styled.div `
     align-items: center;
     justify-content: center;
 `;
+
+export const Rate = styled.div`
+    display: flex;
+    flex-shrink: 0;
+    width: 40px;
+    height: 22px;
+    border: 0.5px solid black;
+    color: black;
+    font-size: 14px;
+    font-weight: normal;
+    justify-content: start;
+    padding: 4px 4px 5px 4px;
+    align-items: center;
+    margin: 4px 0 0 0;
+`;
+
 export const Save = styled.div`
     cursor: pointer;
     width: 150px;
@@ -205,6 +244,7 @@ export const CellsContainer = styled.div`
 export const CellsRow = styled.div`
     width: 150px;
     height: 25px;
+    font-weight: bold;
     display: flex;
     flex-grow: 0;
     margin: 5px;

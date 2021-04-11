@@ -32,6 +32,10 @@ import {
     ToggleVertical,
     OrangeBlockVertical,
     ChangeScaleDiv,
+    Rate,
+    OrangeNumbersBlock,
+    BLockPercent,
+    BLockRate,
 } from "./ScalePopupStyles";
 
 const ScalePopup = (): ReactElement => {
@@ -40,21 +44,36 @@ const ScalePopup = (): ReactElement => {
     const [isEditingScale, setEditingScale] = useState(false);
     const [isVertical, setVertical] = useState(false);
     const [scaleId, setScaleId] = useState(0);
+    const [headRate, setHeadRate] = useState(0);
+    const [rate, setRate] =useState(0);
+    const [limitPercent, setLimitPercent] = useState(0);
+    const [limitRate, setLimitRate] = useState(0);
+
 
     const getData = () => {
         getScaleRequest(scaleId).then(({values, scale}: ScalePopupProps) => {
             const newValues = values;
             const newScale = scale.scale;
             const newScaleId = scale.id;
+            const newRate = scale.rate;
+            const newHeadRate = scale.rate_head;
+            const newLimitPercent = scale.limit_percent;
+            const newLimitRate = scale.limit_rate;
             setScaleId(newScaleId);
             setScale(getNormalScale(newScale));
             setValues(newValues);
+            setRate(newRate);
+            setHeadRate(newHeadRate);
+            setLimitPercent(newLimitPercent);
+            setLimitRate(newLimitRate);
         });
     }
 
     useEffect(() => {
         getData();
     }, []);
+
+
 
     const handleSave = () => {
         const newScale = [...scale];
@@ -156,6 +175,7 @@ const ScalePopup = (): ReactElement => {
         return null;
     }
 
+
     const renderToggleBlock = () => {
         const renderActive = (action: () => void) => {
             return <ToggleBlockActive rotation={90} onClick={() => action()}/>
@@ -230,11 +250,13 @@ const ScalePopup = (): ReactElement => {
                 <ScaleLine maxWidth={(scale.length+2)*58}>
                     <CellsRow isVertical={isVertical}>
                         k рук
-                        <NumberBox value={1} onChange={() => console.log('kruk')} onBlur={() => console.log('kruk')}/>
+                        <NumberBox value={headRate}
+                                   onChange={(value) => setHeadRate(value)}
+                                   onBlur={(value) => setHeadRate(value)}/>
                     </CellsRow>
                     <CellsRow isVertical={isVertical}>
                         k
-                        <NumberBox value={1} onChange={() => console.log('k')} onBlur={() => console.log('k')}/>
+                        <Rate>{rate}</Rate>
                     </CellsRow>
                     <CellsContainer isVertical={isVertical}>{renderCell()}</CellsContainer>
                 </ScaleLine>
@@ -242,6 +264,10 @@ const ScalePopup = (): ReactElement => {
                 {renderFooter()}
             </ScaleBody>
             {renderPlus()}
+            <OrangeNumbersBlock>
+                <BLockPercent>{limitPercent}</BLockPercent>
+                <BLockRate>{limitRate}</BLockRate>
+            </OrangeNumbersBlock>
         </ContainerHorizontal>
     )
 }
