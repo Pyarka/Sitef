@@ -33,7 +33,8 @@ import {
     OrangeBlockVertical,
     ChangeScaleDiv,
     Rate,
-    OrangeNumbersBlock,
+    OrangeNumbersBlockRight,
+    OrangeNumbersBlockLeft,
     BLockPercent,
     BLockRate,
 } from "./ScalePopupStyles";
@@ -48,6 +49,8 @@ const ScalePopup = (): ReactElement => {
     const [rate, setRate] =useState(0);
     const [limitPercent, setLimitPercent] = useState(0);
     const [limitRate, setLimitRate] = useState(0);
+    const [limitMinPercent, setLimitMinPercent] = useState(0);
+    const [limitMinRate, setLimitMinRate] = useState(0);
 
 
     const getData = () => {
@@ -59,6 +62,8 @@ const ScalePopup = (): ReactElement => {
             const newHeadRate = scale.rate_head;
             const newLimitPercent = scale.limit_percent;
             const newLimitRate = scale.limit_rate;
+            const newLimitMinPercent = scale.limit_minPercent;
+            const newLimitMinRate = scale.limit_minRate;
             setScaleId(newScaleId);
             setScale(getNormalScale(newScale));
             setValues(newValues);
@@ -216,11 +221,28 @@ const ScalePopup = (): ReactElement => {
     const renderHeaderBlock = (): ReactElement => {
         return <HeaderBlock>
             <ChangeScaleDiv onClick={() => getData()}>Сменить шкалу</ChangeScaleDiv>
-            <div>кнопка</div>
             <ToggleEdit onClick={() => setEditingScale(!isEditingScale)}/>
             {renderToggleBlock()}
             <CloseButton/>
         </HeaderBlock>
+    }
+
+    const renderScaleContent = (): ReactElement => {
+        return (
+            <>
+                <CellsRow isVertical={isVertical}>
+                    k рук
+                    <NumberBox value={headRate}
+                               onChange={(value) => setHeadRate(value)}
+                               onBlur={(value) => setHeadRate(value)}/>
+                </CellsRow>
+                <CellsRow isVertical={isVertical}>
+                    k
+                    <Rate>{rate}</Rate>
+                </CellsRow>
+                <CellsContainer isVertical={isVertical}>{renderCell()}</CellsContainer>
+            </>
+        )
     }
 
     if (isVertical) {
@@ -232,15 +254,18 @@ const ScalePopup = (): ReactElement => {
                     <NumberBox value={0} onChange={() => console.log("процент")} onBlur={() => console.log("проценти")}/>
                 </OrangeBlockHorizontal>
                 <div>
-                    <div> k рук</div>
-                    <div> k</div>
-                    <CellsContainer isVertical={isVertical}>{renderCell()}</CellsContainer>
+                    {renderScaleContent()}
                 </div>
             </ContainerVertical>
         )
     }
+
     return (
         <ContainerHorizontal>
+            <OrangeNumbersBlockLeft>
+                <BLockPercent>{limitMinPercent}</BLockPercent>
+                <BLockRate>{limitMinRate}</BLockRate>
+            </OrangeNumbersBlockLeft>
             <OrangeBlockVertical>
                 %
                 <NumberBox value={0} onChange={() => console.log("процент")} onBlur={() => console.log("проценти")}/>
@@ -248,26 +273,15 @@ const ScalePopup = (): ReactElement => {
             <ScaleBody>
                 {renderHeaderBlock()}
                 <ScaleLine maxWidth={(scale.length+2)*58}>
-                    <CellsRow isVertical={isVertical}>
-                        k рук
-                        <NumberBox value={headRate}
-                                   onChange={(value) => setHeadRate(value)}
-                                   onBlur={(value) => setHeadRate(value)}/>
-                    </CellsRow>
-                    <CellsRow isVertical={isVertical}>
-                        k
-                        <Rate>{rate}</Rate>
-                    </CellsRow>
-                    <CellsContainer isVertical={isVertical}>{renderCell()}</CellsContainer>
+                    {renderScaleContent()}
                 </ScaleLine>
-
                 {renderFooter()}
             </ScaleBody>
             {renderPlus()}
-            <OrangeNumbersBlock>
+            <OrangeNumbersBlockRight>
                 <BLockPercent>{limitPercent}</BLockPercent>
                 <BLockRate>{limitRate}</BLockRate>
-            </OrangeNumbersBlock>
+            </OrangeNumbersBlockRight>
         </ContainerHorizontal>
     )
 }

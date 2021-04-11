@@ -7,8 +7,8 @@ export interface ScalePopupProps {
     scale: {
         helper_id: number;
         id: number;
-        limit_minPercent?: string;
-        limit_minRate?: string;
+        limit_minPercent?: number;
+        limit_minRate?: number;
         limit_percent: number; //максимальный процент
         limit_rate: number; // максимальный коэффициент
         rate: number; // k
@@ -41,6 +41,8 @@ export const mockData1: ScalePopupProps = {
         rate: 1.25,
         rate_head: 1.00,
         limit_percent: 100,
+        limit_minPercent: 10,
+        limit_minRate: 0.1,
         limit_rate: 1.2,
         scale: '["1500000","1000000","500000","100000","0"]',
         type_calc: 0,
@@ -68,6 +70,8 @@ export const mockData2: ScalePopupProps = {
         rate: 2.25,
         rate_head: 2.00,
         limit_percent: 80,
+        limit_minPercent: 10,
+        limit_minRate: 0.1,
         limit_rate: 2.7,
         scale: '["5","7","9","11","15"]',
         type_calc: 1,

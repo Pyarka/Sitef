@@ -23,6 +23,7 @@ export const ContainerVertical = styled.div`
 
 export const HeaderBlock = styled.div`
     display: flex;
+    justify-content: flex-end;
     flex-direction: row;
     width: auto;
 `;
@@ -74,13 +75,16 @@ export const OrangeNumbersBlock = styled.div`
     flex-direction: column;
     width: 66px;
     color: #ffbe79;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
     justify-content: flex-end;
     align-items: center;
     font-size: 16px;
     padding: 0 0 10px 0;
-    border: 1px solid;
+`;
+export const OrangeNumbersBlockRight = styled(OrangeNumbersBlock)`
+    border-left: 1px solid #ececec;
+`;
+export const OrangeNumbersBlockLeft = styled(OrangeNumbersBlock)`
+    border-right: 1px solid #ececec;
 `;
 
 export const BLockPercent = styled.div`
@@ -100,8 +104,8 @@ export const ScaleLine = styled.div`
     display: flex;
     flex-direction: row;
     font-size: 16px;
-    max-width: ${({maxWidth}: {maxWidth: number}) => `${maxWidth}px`};
-    min-width: ${({maxWidth}: {maxWidth: number}) => `${maxWidth}px`};
+    max-width: ${({maxWidth}: { maxWidth: number }) => `${maxWidth}px`};
+    min-width: ${({maxWidth}: { maxWidth: number }) => `${maxWidth}px`};
     align-items: center;
     color: #00a9bb;
     height: 70px;
@@ -132,13 +136,14 @@ export const ToggleEdit = styled.div`
     }
 `;
 
-export const ChangeScaleDiv = styled.div `
+export const ChangeScaleDiv = styled.div`
     display: flex;
     cursor: pointer;
     border-radius: 5px;
     background: cyan;
     border: 1px solid;
-    padding; 5px 10px;
+    margin: 0 auto 0 10px;
+    padding: 5px 10px;
     width: auto;
     align-items: center;
     justify-content: center;
@@ -200,47 +205,43 @@ export const Footer = styled.div`
     display: flex;
     margin-left: auto;
 `;
-export const ToggleVertical = styled.div`
-    width: 40px;
-    height: 40px; 
-    
+
+export const ToggleBox = styled.div`
     cursor: pointer;
-    
-`;
-export const ToggleHorizontal = styled.div`
-    width: 40px;
-    height: 40px;
-    
-    transform: rotate(90deg);
-    cursor: pointer;
-    
+    display: flex;
+    flex-shrink: 0;
+    height: 29px;
+    width: 29px;
 `;
 
-export const ToggleBlockActive = styled.div`
-    width: 40px;
-    height: 40px; 
+export const ToggleVertical = styled(ToggleBox)``;
+export const ToggleHorizontal = styled(ToggleBox)`
+    transform: rotate(90deg);
+`;
+
+export const ToggleBlockActive = styled(ToggleBox)`
     background: #00c9d8 url(${rectangleWhite}) center no-repeat;
     border: 1px solid #00a9bb;
-    cursor: pointer;
-    transform: ${({rotation}: {rotation: number}) => `rotate(${rotation}deg)`}
+    transform: ${({rotation}: { rotation: number }) => `rotate(${rotation}deg)`}
 `;
-export const ToggleBlockNotActive = styled.div`
-    width: 40px;
-    height: 40px;
+
+export const ToggleBlockNotActive = styled(ToggleBox)`
     background: url(${rectangleGrey}) center no-repeat;
     border: 1px solid #ececec;
-    cursor: pointer;
 `;
+
 export const ToggleBlock = styled.div`
     display: flex;
     border: 1px solid #ececec;
     cursor: pointer;
 `;
+
 export const CellsContainer = styled.div`
     width: 210px;
     display: flex;
-    flex-direction: ${({isVertical}: {isVertical: boolean}) => !isVertical ? "row" : "column"};
+    flex-direction: ${({isVertical}: { isVertical: boolean }) => !isVertical ? "row" : "column"};
 `;
+
 export const CellsRow = styled.div`
     width: 150px;
     height: 25px;
@@ -249,7 +250,7 @@ export const CellsRow = styled.div`
     flex-grow: 0;
     margin: 5px;
     width: auto;
-    flex-direction: ${({isVertical}: {isVertical: boolean}) => isVertical ? "row" : "column"};
+    flex-direction: ${({isVertical}: { isVertical: boolean }) => isVertical ? "row" : "column"};
     align-items: center;
     justify-content: center;
     margin-bottom: 3px;
