@@ -140,7 +140,8 @@ const ScalePopup = (): ReactElement => {
         // вернуть инпут  NumberBox со значением из массива scale по индексу i если isEditingScale
         if (isEditingScale) {
             return (
-                <NumberBox onChange={(newScale) => changeScale(newScale, i)}
+                <NumberBox isLong={isVertical}
+                           onChange={(newScale) => changeScale(newScale, i)}
                            value={+scale[i]}
                            onBlur={(newScale) => changeScale(newScale, i)}
                 />
@@ -160,7 +161,8 @@ const ScalePopup = (): ReactElement => {
         const {value, num} = values.find(({num}) => num === i) || {value: 0, num: i};
         if(!isEditingScale && scale[i] === '') return null;
         return (
-            <NumberBox onChange={(newValue) => changeValue(num, newValue)}
+            <NumberBox isLong={isVertical}
+                       onChange={(newValue) => changeValue(num, newValue)}
                        value={value}
                        onBlur={(newValue) => changeValue(num, newValue)}
             />
@@ -237,7 +239,8 @@ const ScalePopup = (): ReactElement => {
             <>
                 <CellsRow isVertical={isVertical}>
                     k рук
-                    <NumberBox value={headRate}
+                    <NumberBox isLong={isVertical}
+                               value={headRate}
                                onChange={(value) => setHeadRate(value)}
                                onBlur={(value) => setHeadRate(value)}/>
                 </CellsRow>
@@ -275,7 +278,11 @@ const ScalePopup = (): ReactElement => {
                 {renderHeaderBlock()}
                 <OrangeBlockHorizontal>
                     %
-                    <NumberBox value={0} onChange={() => console.log("процент")} onBlur={() => console.log("проценти")}/>
+                    <NumberBox isLong={isVertical}
+                               value={0}
+                               onChange={() => console.log("процент")}
+                               onBlur={() => console.log("проценти")}
+                    />
                 </OrangeBlockHorizontal>
                 <ScaleColumn>
                     {renderScaleContent()}
@@ -289,7 +296,10 @@ const ScalePopup = (): ReactElement => {
         <ContainerHorizontal>
             <OrangeBlockVertical>
                 %
-                <NumberBox value={0} onChange={() => console.log("процент")} onBlur={() => console.log("проценти")}/>
+                <NumberBox isLong={isVertical}
+                           value={0}
+                           onChange={() => console.log("процент")}
+                           onBlur={() => console.log("проценти")}/>
             </OrangeBlockVertical>
             {renderLimits("left")}
             <ScaleBody>

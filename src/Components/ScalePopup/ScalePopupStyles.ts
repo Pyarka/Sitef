@@ -17,7 +17,7 @@ export const ContainerVertical = styled.div`
     display: flex;
     flex-direction: column;
     flex-grow: 0;
-    width: 250px;
+    width: 280px;
     border: 1px solid;
 `;
 
@@ -60,7 +60,7 @@ export const OrangeBlockVertical = styled.div`
 export const OrangeBlockHorizontal = styled.div`
     display: flex;
     flex-direction: row;
-    width: 200px;
+    height: 40px;
     background-color: #ffbe79;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
