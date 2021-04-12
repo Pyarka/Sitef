@@ -22,6 +22,7 @@ import {
     ScaleStyle,
     ToggleBlock,
     ToggleBlockActive,
+    ScaleColumn,
     ToggleBlockNotActive,
     Cancel,
     ToggleEdit,
@@ -43,7 +44,7 @@ const ScalePopup = (): ReactElement => {
     const [scale, setScale] = useState([] as string[]);
     const [values, setValues] = useState([] as ValuesInterface[]);
     const [isEditingScale, setEditingScale] = useState(false);
-    const [isVertical, setVertical] = useState(false);
+    const [isVertical, setVertical] = useState(true);
     const [scaleId, setScaleId] = useState(0);
     const [headRate, setHeadRate] = useState(0);
     const [rate, setRate] =useState(0);
@@ -60,10 +61,10 @@ const ScalePopup = (): ReactElement => {
             const newScaleId = scale.id;
             const newRate = scale.rate;
             const newHeadRate = scale.rate_head;
-            const newLimitPercent = scale.limit_percent;
-            const newLimitRate = scale.limit_rate;
-            const newLimitMinPercent = scale.limit_minPercent;
-            const newLimitMinRate = scale.limit_minRate;
+            const newLimitPercent = scale.limit_percent || 0;
+            const newLimitRate = scale.limit_rate || 0;
+            const newLimitMinPercent = scale.limit_minPercent || 0;
+            const newLimitMinRate = scale.limit_minRate || 0;
             setScaleId(newScaleId);
             setScale(getNormalScale(newScale));
             setValues(newValues);
@@ -71,6 +72,8 @@ const ScalePopup = (): ReactElement => {
             setHeadRate(newHeadRate);
             setLimitPercent(newLimitPercent);
             setLimitRate(newLimitRate);
+            setLimitMinPercent(newLimitMinPercent);
+            setLimitMinRate(newLimitMinRate);
         });
     }
 
@@ -103,8 +106,10 @@ const ScalePopup = (): ReactElement => {
         setEditingScale(false);
     }
 
-
-
+    const handleCancel = () => {
+        getData();
+        setEditingScale(false);
+    }
 
     const changeValue = (num: number, masValue: number) => {
         const newValues = values.map((valuesItem) => {
@@ -212,7 +217,7 @@ const ScalePopup = (): ReactElement => {
             return (
                 <Footer>
                     <Save onClick={() => handleSave()}> Сохранить </Save>
-                    <Cancel onClick={() => }> Отмена </Cancel>
+                    <Cancel onClick={() => handleCancel()}> Отмена </Cancel>
                 </Footer>
             )
         }
@@ -272,9 +277,9 @@ const ScalePopup = (): ReactElement => {
                     %
                     <NumberBox value={0} onChange={() => console.log("процент")} onBlur={() => console.log("проценти")}/>
                 </OrangeBlockHorizontal>
-                <div>
+                <ScaleColumn>
                     {renderScaleContent()}
-                </div>
+                </ScaleColumn>
                 {renderFooter()}
             </ContainerVertical>
         )
@@ -282,11 +287,11 @@ const ScalePopup = (): ReactElement => {
 
     return (
         <ContainerHorizontal>
-            {renderLimits("left")}
             <OrangeBlockVertical>
                 %
                 <NumberBox value={0} onChange={() => console.log("процент")} onBlur={() => console.log("проценти")}/>
             </OrangeBlockVertical>
+            {renderLimits("left")}
             <ScaleBody>
                 {renderHeaderBlock()}
                 <ScaleLine maxWidth={(scale.length+2)*58}>

@@ -225,6 +225,11 @@ export const ToggleBlockActive = styled(ToggleBox)`
     transform: ${({rotation}: { rotation: number }) => `rotate(${rotation}deg)`}
 `;
 
+export const ScaleColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 export const ToggleBlockNotActive = styled(ToggleBox)`
     background: url(${rectangleGrey}) center no-repeat;
     border: 1px solid #ececec;

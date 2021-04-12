@@ -9,8 +9,8 @@ export interface ScalePopupProps {
         id: number;
         limit_minPercent?: number;
         limit_minRate?: number;
-        limit_percent: number; //максимальный процент
-        limit_rate: number; // максимальный коэффициент
+        limit_percent?: number; //максимальный процент
+        limit_rate?: number; // максимальный коэффициент
         rate: number; // k
         rate_head: number; // k рук
         rate_planning?: string;
