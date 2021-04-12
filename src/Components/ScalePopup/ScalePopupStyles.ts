@@ -262,7 +262,7 @@ export const CellsRow = styled.div`
     margin-top: 3px;
 `;
 export const CellsValues = styled.div`
-   
+   margin: 0 0 0 5px;
 `;
 
 
