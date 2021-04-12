@@ -212,7 +212,7 @@ const ScalePopup = (): ReactElement => {
             return (
                 <Footer>
                     <Save onClick={() => handleSave()}> Сохранить </Save>
-                    <Cancel onClick={() => console.log("canceled")}> Отмена </Cancel>
+                    <Cancel onClick={() => }> Отмена </Cancel>
                 </Footer>
             )
         }
@@ -245,6 +245,25 @@ const ScalePopup = (): ReactElement => {
         )
     }
 
+    const renderLimits = (side: "left" | "right"): ReactElement => {
+        if(side === "left") {
+            return (
+                <OrangeNumbersBlockLeft>
+                    <BLockPercent>{limitMinPercent}</BLockPercent>
+                    <BLockRate>{limitMinRate}</BLockRate>
+                </OrangeNumbersBlockLeft>
+            )
+        }
+        else {
+            return (
+                    <OrangeNumbersBlockRight>
+                        <BLockPercent>{limitPercent}</BLockPercent>
+                        <BLockRate>{limitRate}</BLockRate>
+                    </OrangeNumbersBlockRight>
+            )
+        }
+    }
+
     if (isVertical) {
         return (
             <ContainerVertical>
@@ -256,16 +275,14 @@ const ScalePopup = (): ReactElement => {
                 <div>
                     {renderScaleContent()}
                 </div>
+                {renderFooter()}
             </ContainerVertical>
         )
     }
 
     return (
         <ContainerHorizontal>
-            <OrangeNumbersBlockLeft>
-                <BLockPercent>{limitMinPercent}</BLockPercent>
-                <BLockRate>{limitMinRate}</BLockRate>
-            </OrangeNumbersBlockLeft>
+            {renderLimits("left")}
             <OrangeBlockVertical>
                 %
                 <NumberBox value={0} onChange={() => console.log("процент")} onBlur={() => console.log("проценти")}/>
@@ -278,10 +295,7 @@ const ScalePopup = (): ReactElement => {
                 {renderFooter()}
             </ScaleBody>
             {renderPlus()}
-            <OrangeNumbersBlockRight>
-                <BLockPercent>{limitPercent}</BLockPercent>
-                <BLockRate>{limitRate}</BLockRate>
-            </OrangeNumbersBlockRight>
+            {renderLimits("right")}
         </ContainerHorizontal>
     )
 }
