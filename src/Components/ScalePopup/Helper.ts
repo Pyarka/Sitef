@@ -3,6 +3,8 @@ export interface ValuesInterface {
     value: number;
 }
 
+export type RateStyleProps = {isLong: boolean; isNear: boolean};
+
 export interface ScalePopupProps {
     scale: {
         helper_id: number;

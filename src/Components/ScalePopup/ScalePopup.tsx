@@ -242,8 +242,6 @@ const ScalePopup = (): ReactElement => {
     }
 
     const renderScaleContent = (): ReactElement => {
-        //Rate (margin: ${({isNear}: {isNear: boolean}) => isNear?"3px 0 0 0" :"3px 7px 0 0"};
-        // isNear={isVertical})
         return (
             <>
                 <CellsRow isVertical={isVertical}>
@@ -255,14 +253,12 @@ const ScalePopup = (): ReactElement => {
                 </CellsRow>
                 <KStyle>
                     <CellsRow isVertical={isVertical}>
-                    <CellsScale isLong={isVertical}>
-                        k
-                    </CellsScale>
-
-                    <Rate  isLong={isVertical}  >{rate}</Rate>
+                        <CellsScale isLong={isVertical}>
+                            k
+                        </CellsScale>
+                        <Rate isLong={isVertical} isNear={isVertical} >{rate}</Rate>
                 </CellsRow>
                 </KStyle>
-
                 <CellsContainer isVertical={isVertical}>{renderCell()}</CellsContainer>
             </>
         )

@@ -6,6 +6,7 @@ import rectangleWhite from '../../Assets/Images/rectangleWhite.png';
 import edit from '../../Assets/Images/edit.png';
 import editActive from '../../Assets/Images/editActive.png';
 import plus from '../../Assets/Images/plusWhite.png';
+import {RateStyleProps} from "./Helper";
 
 export const ScaleStyle = styled.div`
   text-align: end;
@@ -158,7 +159,8 @@ export const KStyle = styled.div `
 export const Rate = styled.div`
     display: flex;
     flex-shrink: 0;
-    width: ${({isLong}: {isLong: boolean}) => isLong? "200px" :"45px"};
+    width: ${({isLong}: RateStyleProps ) => isLong? "200px" :"45px"};
+    margin: ${({isNear}: RateStyleProps) => isNear? "3px 0 0 0" :"3px 7px 0 0"};
     height: 27px;
     border: 0.5px solid black;
     color: black;
