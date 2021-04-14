@@ -38,6 +38,8 @@ import {
     OrangeNumbersBlockLeft,
     BLockPercent,
     BLockRate,
+    CellsScale,
+    KStyle,
 } from "./ScalePopupStyles";
 
 const ScalePopup = (): ReactElement => {
@@ -172,7 +174,7 @@ const ScalePopup = (): ReactElement => {
     const renderCell = () => {
         return scale.map((scaleItem, i) => {
             return <CellsRow key={test[i]} isVertical={isVertical}>
-                <div>{renderScale(i)}</div>
+                <CellsScale isLong={isVertical}>{renderScale(i)}</CellsScale>
                 <CellsValues>{renderValues(i)}</CellsValues>
             </CellsRow>
         })
@@ -228,26 +230,39 @@ const ScalePopup = (): ReactElement => {
     const renderHeaderBlock = (): ReactElement => {
         return <HeaderBlock>
             <ChangeScaleDiv onClick={() => getData()}>Сменить шкалу</ChangeScaleDiv>
-            <ToggleEdit onClick={() => setEditingScale(!isEditingScale)}/>
+            <ToggleEdit onClick={() => {
+                if(!isEditingScale) {
+                    setEditingScale(!isEditingScale);
+                }
+            }
+            }/>
             {renderToggleBlock()}
             <CloseButton/>
         </HeaderBlock>
     }
 
     const renderScaleContent = (): ReactElement => {
+        //Rate (margin: ${({isNear}: {isNear: boolean}) => isNear?"3px 0 0 0" :"3px 7px 0 0"};
+        // isNear={isVertical})
         return (
             <>
                 <CellsRow isVertical={isVertical}>
-                    k рук
+                    <CellsScale isLong={isVertical}>k рук</CellsScale>
                     <NumberBox isLong={isVertical}
                                value={headRate}
                                onChange={(value) => setHeadRate(value)}
                                onBlur={(value) => setHeadRate(value)}/>
                 </CellsRow>
-                <CellsRow isVertical={isVertical}>
-                    k
-                    <Rate>{rate}</Rate>
+                <KStyle>
+                    <CellsRow isVertical={isVertical}>
+                    <CellsScale isLong={isVertical}>
+                        k
+                    </CellsScale>
+
+                    <Rate  isLong={isVertical}  >{rate}</Rate>
                 </CellsRow>
+                </KStyle>
+
                 <CellsContainer isVertical={isVertical}>{renderCell()}</CellsContainer>
             </>
         )

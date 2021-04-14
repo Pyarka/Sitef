@@ -149,19 +149,24 @@ export const ChangeScaleDiv = styled.div`
     justify-content: center;
 `;
 
+export const KStyle = styled.div `
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+`;
+
 export const Rate = styled.div`
     display: flex;
     flex-shrink: 0;
-    width: 40px;
-    height: 22px;
+    width: ${({isLong}: {isLong: boolean}) => isLong? "200px" :"45px"};
+    height: 27px;
     border: 0.5px solid black;
     color: black;
     font-size: 14px;
     font-weight: normal;
     justify-content: start;
-    padding: 4px 4px 5px 4px;
+    padding: 0 1px 2px 1px;
     align-items: center;
-    margin: 4px 0 0 0;
 `;
 
 export const Save = styled.div`
@@ -228,6 +233,7 @@ export const ToggleBlockActive = styled(ToggleBox)`
 export const ScaleColumn = styled.div`
     display: flex;
     flex-direction: column;
+    color: #00a9bb;
 `;
 
 export const ToggleBlockNotActive = styled(ToggleBox)`
@@ -242,9 +248,14 @@ export const ToggleBlock = styled.div`
 `;
 
 export const CellsContainer = styled.div`
-    width: 210px;
+    width: 100%;
     display: flex;
     flex-direction: ${({isVertical}: { isVertical: boolean }) => !isVertical ? "row" : "column"};
+`;
+
+export const CellsScale = styled.div `
+    width: ${({isLong}: {isLong: boolean}) => isLong? "70px" :""};
+    height: ${({isLong}: {isLong: boolean}) => isLong? "27px" :""};
 `;
 
 export const CellsRow = styled.div`
