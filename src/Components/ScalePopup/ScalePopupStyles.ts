@@ -16,12 +16,14 @@ export const ContainerVertical = styled.div`
     flex-direction: column;
     flex-grow: 0;
     width: 280px;
+    padding-bottom: 20px;
     border: 1px solid;
 `;
 
 export const HeaderBlock = styled.div`
     display: flex;
-    justify-content: flex-end;
+    padding: 15px 0;
+    justify-content: space-between;
     flex-direction: row;
     width: auto;
 `;
@@ -70,7 +72,7 @@ export const OrangeBlockHorizontal = styled.div`
 
 export const OrangeNumbersBlock = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: ${({direction}: { direction: 'row' | 'column' }) => `${direction}`};
     width: 66px;
     color: #ffbe79;
     justify-content: flex-end;
@@ -140,7 +142,6 @@ export const ChangeScaleDiv = styled.div`
     border-radius: 5px;
     background: cyan;
     border: 1px solid;
-    margin: 0 auto 0 10px;
     padding: 5px 10px;
     width: auto;
     align-items: center;

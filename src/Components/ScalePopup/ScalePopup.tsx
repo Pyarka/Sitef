@@ -268,7 +268,7 @@ const ScalePopup = (): ReactElement => {
     const renderLimits = (side: "left" | "right"): ReactElement => {
         if(side === "left") {
             return (
-                <OrangeNumbersBlockLeft>
+                <OrangeNumbersBlockLeft direction={isVertical? 'row': 'column'}>
                     <BLockPercent>{limitMinPercent}</BLockPercent>
                     <BLockRate>{limitMinRate}</BLockRate>
                 </OrangeNumbersBlockLeft>
@@ -276,7 +276,7 @@ const ScalePopup = (): ReactElement => {
         }
         else {
             return (
-                    <OrangeNumbersBlockRight>
+                    <OrangeNumbersBlockRight direction={isVertical? 'row': 'column'}>
                         <BLockPercent>{limitPercent}</BLockPercent>
                         <BLockRate>{limitRate}</BLockRate>
                     </OrangeNumbersBlockRight>
@@ -296,9 +296,11 @@ const ScalePopup = (): ReactElement => {
                                onBlur={() => console.log("проценти")}
                     />
                 </OrangeBlockHorizontal>
+                {renderLimits("left")}
                 <ScaleColumn>
                     {renderScaleContent()}
                 </ScaleColumn>
+                {renderLimits("right")}
                 {renderFooter()}
             </ContainerVertical>
         )
