@@ -9,9 +9,6 @@ import plus from '../../Assets/Images/plusWhite.png';
 import {RateStyleProps} from "./Helper";
 
 export const ScaleStyle = styled.div`
-  text-align: end;
-  width: 15px;
-  padding: 0 10px 0 0;
 `;
 
 export const ContainerVertical = styled.div`
@@ -159,15 +156,14 @@ export const KStyle = styled.div `
 export const Rate = styled.div`
     display: flex;
     flex-shrink: 0;
-    width: ${({isLong}: RateStyleProps ) => isLong? "200px" :"45px"};
-    margin: ${({isNear}: RateStyleProps) => isNear? "3px 0 0 0" :"3px 7px 0 0"};
+    width: ${({isLong}: RateStyleProps ) => isLong? "165px" :"45px"};
+    margin: 3px 10px 0 10px;
     height: 27px;
-    border: 0.5px solid black;
+    border: 1px solid #ececec;
     color: black;
     font-size: 14px;
     font-weight: normal;
     justify-content: start;
-    padding: 0 1px 2px 1px;
     align-items: center;
 `;
 
@@ -256,26 +252,28 @@ export const CellsContainer = styled.div`
 `;
 
 export const CellsScale = styled.div `
-    width: ${({isLong}: {isLong: boolean}) => isLong? "70px" :""};
+    justify-content: flex-end;
+    display: flex;
     height: ${({isLong}: {isLong: boolean}) => isLong? "27px" :""};
+    min-width: 65px;
+`;
+
+export const PercentBlock = styled(CellsScale) `
+    
 `;
 
 export const CellsRow = styled.div`
-    width: 150px;
     height: 25px;
     font-weight: bold;
     display: flex;
-    flex-grow: 0;
-    margin: 5px;
+    flex-grow: 1;
     width: auto;
     flex-direction: ${({isVertical}: { isVertical: boolean }) => isVertical ? "row" : "column"};
     align-items: center;
     justify-content: center;
-    margin-bottom: 3px;
-    margin-top: 3px;
+    padding: 5px 0;
 `;
 export const CellsValues = styled.div`
-   margin: 0 0 0 5px;
 `;
 
 

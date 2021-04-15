@@ -40,6 +40,7 @@ import {
     BLockRate,
     CellsScale,
     KStyle,
+    PercentBlock,
 } from "./ScalePopupStyles";
 
 const ScalePopup = (): ReactElement => {
@@ -288,7 +289,7 @@ const ScalePopup = (): ReactElement => {
             <ContainerVertical>
                 {renderHeaderBlock()}
                 <OrangeBlockHorizontal>
-                    %
+                    <PercentBlock isLong={isVertical}>%</PercentBlock>
                     <NumberBox isLong={isVertical}
                                value={0}
                                onChange={() => console.log("процент")}
