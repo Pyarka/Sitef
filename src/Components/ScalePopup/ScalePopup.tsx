@@ -177,7 +177,7 @@ const ScalePopup = (): ReactElement => {
     const renderCell = () => {
         return scale.map((scaleItem, i) => {
             return <CellsRow key={test[i]} isVertical={isVertical}>
-                <CellsScale isLong={isVertical}>{renderScale(i)}</CellsScale>
+                <CellsScale isCenter={!isVertical} isLong={isVertical}>{renderScale(i)}</CellsScale>
                 <CellsValues>{renderValues(i)}</CellsValues>
             </CellsRow>
         })
@@ -248,7 +248,7 @@ const ScalePopup = (): ReactElement => {
         return (
             <>
                 <CellsRow isVertical={isVertical}>
-                    <CellsScale isLong={isVertical}>k рук</CellsScale>
+                    <CellsScale isCenter={!isVertical} isLong={isVertical}>k рук</CellsScale>
                     <NumberBox isLong={isVertical}
                                value={headRate}
                                onChange={(value) => setHeadRate(value)}
@@ -256,10 +256,10 @@ const ScalePopup = (): ReactElement => {
                 </CellsRow>
                 <KStyle>
                     <CellsRow isVertical={isVertical}>
-                        <CellsScale isLong={isVertical}>
+                        <CellsScale isCenter={!isVertical} isLong={isVertical}>
                             k
                         </CellsScale>
-                        <Rate isLong={isVertical} isNear={isVertical} >{rate}</Rate>
+                        <Rate isLong={isVertical} >{rate}</Rate>
                 </CellsRow>
                 </KStyle>
                 <CellsContainer isVertical={isVertical}>{renderCell()}</CellsContainer>
@@ -294,7 +294,7 @@ const ScalePopup = (): ReactElement => {
             <ContainerVertical>
                 {renderHeaderBlock()}
                 <OrangeBlockHorizontal>
-                    <PercentBlock isLong={isVertical}>%</PercentBlock>
+                    <PercentBlock isCenter={!isVertical} isLong={isVertical}>%</PercentBlock>
                     <NumberBox isLong={isVertical}
                                value={0}
                                onChange={() => console.log("процент")}
@@ -323,7 +323,7 @@ const ScalePopup = (): ReactElement => {
             {renderLimits("left")}
             <ScaleBody>
                 {renderHeaderBlock()}
-                <ScaleLine maxWidth={(scale.length+2)*58}>
+                <ScaleLine maxWidth={(scale.length+2)*67}>
                     {renderScaleContent()}
                 </ScaleLine>
                 {renderFooter()}

@@ -6,7 +6,7 @@ import rectangleWhite from '../../Assets/Images/rectangleWhite.png';
 import edit from '../../Assets/Images/edit.png';
 import editActive from '../../Assets/Images/editActive.png';
 import plus from '../../Assets/Images/plusWhite.png';
-import {RateStyleProps} from "./Helper";
+import {RateStyleProps, CellsScaleStyleProps} from "./Helper";
 
 export const ScaleStyle = styled.div`
 `;
@@ -264,9 +264,9 @@ export const CellsContainer = styled.div`
 `;
 
 export const CellsScale = styled.div `
-    justify-content: flex-end;
+    justify-content: ${({isCenter}: CellsScaleStyleProps) => isCenter?"center" :"flex-end"};
     display: flex;
-    height: ${({isLong}: {isLong: boolean}) => isLong? "27px" :""};
+    height: ${({isLong}: CellsScaleStyleProps) => isLong? "27px" :""};
     min-width: 65px;
 `;
 

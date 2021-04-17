@@ -2,8 +2,8 @@ export interface ValuesInterface {
     num: number;
     value: number;
 }
-
-export type RateStyleProps = {isLong: boolean; isNear: boolean};
+export type RateStyleProps = {isLong: boolean};
+export type CellsScaleStyleProps = {isCenter: boolean; isLong: boolean};
 
 export interface ScalePopupProps {
     scale: {
