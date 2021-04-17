@@ -22,7 +22,7 @@ export const ContainerVertical = styled.div`
 
 export const HeaderBlock = styled.div`
     display: flex;
-    padding: 15px 0;
+    padding: 5px 5px;
     justify-content: space-between;
     flex-direction: row;
     width: auto;
@@ -72,7 +72,7 @@ export const OrangeBlockHorizontal = styled.div`
 
 export const OrangeNumbersBlock = styled.div`
     display: flex;
-    flex-direction: ${({direction}: { direction: 'row' | 'column' }) => `${direction}`};
+    flex-direction: column;
     width: 66px;
     color: #ffbe79;
     justify-content: flex-end;
@@ -87,12 +87,23 @@ export const OrangeNumbersBlockLeft = styled(OrangeNumbersBlock)`
     border-right: 1px solid #ececec;
 `;
 
+export const OrangeNumbersBlockTop = styled(OrangeNumbersBlock)`
+    width: 100%;
+    border-bottom: 1px solid #ececec;
+    flex-direction: row;
+`;
+export const OrangeNumbersBlockBottom = styled(OrangeNumbersBlock)`
+    width: 100%;
+    border-top: 1px solid #ececec;
+    flex-direction: row;
+`;
+
 export const BLockPercent = styled.div`
-   margin: 2px;
+   margin: 2px 5px 2px 40%;
 `;
 
 export const BLockRate = styled.div`
-   margin: 2px;
+   margin: 2px 40% 2px 5px;
 `;
 
 export const ScaleBody = styled.div`
@@ -136,7 +147,7 @@ export const ToggleEdit = styled.div`
     }
 `;
 
-export const ChangeScaleDiv = styled.div`
+export const ChangeScaleList = styled.select`
     display: flex;
     cursor: pointer;
     border-radius: 5px;

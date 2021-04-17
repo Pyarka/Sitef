@@ -32,7 +32,7 @@ import {
     ScaleLine,
     ToggleVertical,
     OrangeBlockVertical,
-    ChangeScaleDiv,
+    ChangeScaleList,
     Rate,
     OrangeNumbersBlockRight,
     OrangeNumbersBlockLeft,
@@ -41,6 +41,8 @@ import {
     CellsScale,
     KStyle,
     PercentBlock,
+    OrangeNumbersBlockTop,
+    OrangeNumbersBlockBottom,
 } from "./ScalePopupStyles";
 
 const ScalePopup = (): ReactElement => {
@@ -230,7 +232,7 @@ const ScalePopup = (): ReactElement => {
     }
     const renderHeaderBlock = (): ReactElement => {
         return <HeaderBlock>
-            <ChangeScaleDiv onClick={() => getData()}>Сменить шкалу</ChangeScaleDiv>
+            <ChangeScaleList onClick={() => getData()}><option>Сменить шкалу</option></ChangeScaleList>
             <ToggleEdit onClick={() => {
                 if(!isEditingScale) {
                     setEditingScale(!isEditingScale);
@@ -265,23 +267,26 @@ const ScalePopup = (): ReactElement => {
         )
     }
 
-    const renderLimits = (side: "left" | "right"): ReactElement => {
-        if(side === "left") {
-            return (
-                <OrangeNumbersBlockLeft direction={isVertical? 'row': 'column'}>
-                    <BLockPercent>{limitMinPercent}</BLockPercent>
-                    <BLockRate>{limitMinRate}</BLockRate>
-                </OrangeNumbersBlockLeft>
-            )
+    const renderPercentAndRate = (value: boolean): ReactElement => {
+        const displayPercent = value? limitMinPercent : limitPercent;
+        const displayRate = value? limitMinRate : limitRate;
+        return (
+            <>
+                <BLockPercent>{displayPercent}</BLockPercent>
+                <BLockRate>{displayRate}</BLockRate>
+            </>
+        )
+    }
+
+    const renderLimits = (side: "left" | "right" | "top" | "bottom"): ReactElement => {
+        //собрать объект где по 4 ключам лежат 4 разных варианта отображения, в зависимости от ключа возвращать значение этого объекта
+        const orangeBlocks = {
+            left: () => <OrangeNumbersBlockLeft>{renderPercentAndRate(true)}</OrangeNumbersBlockLeft>,
+            right: () => <OrangeNumbersBlockRight>{renderPercentAndRate(false)}</OrangeNumbersBlockRight>,
+            top: () => <OrangeNumbersBlockTop>{renderPercentAndRate(true)}</OrangeNumbersBlockTop>,
+            bottom: () => <OrangeNumbersBlockBottom>{renderPercentAndRate(false)}</OrangeNumbersBlockBottom>
         }
-        else {
-            return (
-                    <OrangeNumbersBlockRight direction={isVertical? 'row': 'column'}>
-                        <BLockPercent>{limitPercent}</BLockPercent>
-                        <BLockRate>{limitRate}</BLockRate>
-                    </OrangeNumbersBlockRight>
-            )
-        }
+        return orangeBlocks[side]();
     }
 
     if (isVertical) {
@@ -296,11 +301,11 @@ const ScalePopup = (): ReactElement => {
                                onBlur={() => console.log("проценти")}
                     />
                 </OrangeBlockHorizontal>
-                {renderLimits("left")}
+                {renderLimits("top")}
                 <ScaleColumn>
                     {renderScaleContent()}
                 </ScaleColumn>
-                {renderLimits("right")}
+                {renderLimits("bottom")}
                 {renderFooter()}
             </ContainerVertical>
         )
