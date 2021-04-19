@@ -1,5 +1,6 @@
 import React, {ReactElement, useEffect, useState} from 'react';
 import {Container, Arrow} from './SelectorStyles';
+import {getAllScaleRequest, getNormalScale, getScaleRequest, ScalePopupProps} from "../ScalePopup/Helper";
 
 type SelectorItemId = number;
 
@@ -10,7 +11,6 @@ interface SelectorItem {
 }
 
 interface SelectorProps {
-    itemsArray: SelectorItem[];
     isSelected: SelectorItemId;
     onSelect: (selectedId: SelectorItemId) => void;
 }
@@ -26,17 +26,39 @@ interface SelectorProps {
  * @param isLong
  * @constructor
  */
-const Selector = ({itemsArray, isSelected, onSelect}: SelectorProps):ReactElement => {
-    const [isOpened, setOpened] = useState(false);
+const Selector = ({isSelected, onSelect}: SelectorProps):ReactElement => {
+    const [isOpened, setOpened] = useState(true);
     const [selectedElement, setSelectedElement] = useState(0);
+    const [allScales, setAllScales] = useState([] as ScalePopupProps[]);
     //1. Рендер первой строки, на этой строке выбранный элемент и стрелка вниз.
     //2. Метод для рендера всех строк кроме первой.
+
+    const getData = () => {
+        getAllScaleRequest().then((scaleArray: ScalePopupProps[]) => {
+            const newScaleArray =
+        });
+
+
+    }
+
+    const renderAllElements = (): ReactElement[] => {
+
+
+
+        return itemsArray.filter(({id}) => id !== selectedElement).map(({id, name}) => {
+            return (
+                <div>
+                    <IdCell>{id}</IdCell>
+                    <NameCell>{name}</NameCell>
+                </div>
+            )
+        })
+
+    }
     return (
-        <Container isLong={isLong}>
-            <input onChange={(e) => onChange(+e.target.value)}
-                   onBlur={(e) => onBlur(+e.target.value)}
-                   value={ value ? value : '0'}
-            />
+        <Container>
+            <div>Верхняя строка с выбранным элементом</div>
+            {renderAllElements()}
         </Container>
     );
 };

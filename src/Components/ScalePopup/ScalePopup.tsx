@@ -5,9 +5,11 @@ import {
     ScalePopupProps,
     ValuesInterface,
     scaleSaving,
-    ScalePopupSaveEdit, formatValuesBeforeSave
+    ScalePopupSaveEdit, formatValuesBeforeSave, getAllScaleRequest
 } from './Helper';
 import NumberBox from "../NumberBox/NumberBox";
+import Selector from "../Selector/Selector";
+
 import {
     CellsContainer,
     CellsRow,
@@ -59,6 +61,7 @@ const ScalePopup = (): ReactElement => {
     const [limitMinRate, setLimitMinRate] = useState(0);
 
 
+
     const getData = () => {
         getScaleRequest(scaleId).then(({values, scale}: ScalePopupProps) => {
             const newValues = values;
@@ -80,6 +83,8 @@ const ScalePopup = (): ReactElement => {
             setLimitMinPercent(newLimitMinPercent);
             setLimitMinRate(newLimitMinRate);
         });
+
+
     }
 
     useEffect(() => {
@@ -292,6 +297,7 @@ const ScalePopup = (): ReactElement => {
     if (isVertical) {
         return (
             <ContainerVertical>
+                <Selector isSelected={scaleId} onSelect={(value) => console.log(value)}/>
                 {renderHeaderBlock()}
                 <OrangeBlockHorizontal>
                     <PercentBlock isCenter={!isVertical} isLong={isVertical}>%</PercentBlock>

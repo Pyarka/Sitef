@@ -204,3 +204,12 @@ export const getScaleRequest = (idScale: number): Promise<ScalePopupProps> => {
         }, 300);
     });
 }
+
+export const getAllScaleRequest = (): Promise<ScalePopupProps[]> => {
+    const result = [mockData1, mockData2, mockData3, mockData4, mockData5];
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(result);
+        }, 300);
+    });
+}
