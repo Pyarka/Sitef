@@ -94,6 +94,93 @@ export const mockData2: ScalePopupProps = {
         }
     ],
 };
+export const mockData3: ScalePopupProps = {
+    scale: {
+        helper_id: 65,
+        id: 502415,
+        rate: 1.25,
+        rate_head: 1.00,
+        limit_percent: 100,
+        limit_minPercent: 10,
+        limit_minRate: 0.1,
+        limit_rate: 1.2,
+        scale: '["1500000","1000000","500000","100000","0"]',
+        type_calc: 0,
+    },
+    values: [
+        {
+            num: 0,
+            value: 3.500,
+        }, {
+            num: 1,
+            value: 2.500,
+        }, {
+            num: 2,
+            value: 1.500,
+        }, {
+            num: 3,
+            value: 0.500,
+        }
+    ],
+};
+export const mockData4: ScalePopupProps = {
+    scale: {
+        helper_id: 16,
+        id: 202413,
+        rate: 1.25,
+        rate_head: 1.00,
+        limit_percent: 100,
+        limit_minPercent: 10,
+        limit_minRate: 0.1,
+        limit_rate: 1.2,
+        scale: '["1500000","1000000","500000","100000","0"]',
+        type_calc: 0,
+    },
+    values: [
+        {
+            num: 0,
+            value: 3.500,
+        }, {
+            num: 1,
+            value: 2.500,
+        }, {
+            num: 2,
+            value: 1.500,
+        }, {
+            num: 3,
+            value: 0.500,
+        }
+    ],
+};
+export const mockData5: ScalePopupProps = {
+    scale: {
+        helper_id: 236,
+        id: 5025513,
+        rate: 1.25,
+        rate_head: 1.00,
+        limit_percent: 100,
+        limit_minPercent: 10,
+        limit_minRate: 0.1,
+        limit_rate: 1.2,
+        scale: '["1500000","1000000","500000","100000","0"]',
+        type_calc: 0,
+    },
+    values: [
+        {
+            num: 0,
+            value: 3.500,
+        }, {
+            num: 1,
+            value: 2.500,
+        }, {
+            num: 2,
+            value: 1.500,
+        }, {
+            num: 3,
+            value: 0.500,
+        }
+    ],
+};
 
 type ValueItem = {[key: number]: number};
 

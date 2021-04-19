@@ -1,11 +1,6 @@
 import React, {ReactElement, useEffect, useState} from 'react';
 import {Container, Arrow} from './SelectorStyles';
 
-const Selector = (): ReactElement => {
-    const [isOpened, setOpened] = useState(false);
-    const [selectedElement, setSelectedElement] = useState(0);
-}
-
 type SelectorItemId = number;
 
 interface SelectorItem {
@@ -14,14 +9,11 @@ interface SelectorItem {
     description: string;
 }
 
-
 interface SelectorProps {
     itemsArray: SelectorItem[];
     isSelected: SelectorItemId;
     onSelect: (selectedId: SelectorItemId) => void;
 }
-
-
 
 /**
  *
@@ -34,7 +26,9 @@ interface SelectorProps {
  * @param isLong
  * @constructor
  */
-const Selector = ({itemsArray, isSelected, onSelect}: SelectorProps) => {
+const Selector = ({itemsArray, isSelected, onSelect}: SelectorProps):ReactElement => {
+    const [isOpened, setOpened] = useState(false);
+    const [selectedElement, setSelectedElement] = useState(0);
     //1. Рендер первой строки, на этой строке выбранный элемент и стрелка вниз.
     //2. Метод для рендера всех строк кроме первой.
     return (
