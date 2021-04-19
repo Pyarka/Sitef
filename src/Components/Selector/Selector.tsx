@@ -1,5 +1,10 @@
-import React from 'react';
+import React, {ReactElement, useEffect, useState} from 'react';
 import {Container, Arrow} from './SelectorStyles';
+
+const Selector = (): ReactElement => {
+    const [isOpened, setOpened] = useState(false);
+    const [selectedElement, setSelectedElement] = useState(0);
+}
 
 type SelectorItemId = number;
 
