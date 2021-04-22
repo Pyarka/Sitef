@@ -9,6 +9,7 @@ export interface ScalePopupProps {
     scale: {
         helper_id: number;
         id: number;
+        name: string;
         limit_minPercent?: number;
         limit_minRate?: number;
         limit_percent?: number; //максимальный процент
@@ -40,6 +41,7 @@ export const mockData1: ScalePopupProps = {
     scale: {
         helper_id: 6,
         id: 502413,
+        name: "Химики",
         rate: 1.25,
         rate_head: 1.00,
         limit_percent: 100,
@@ -69,6 +71,7 @@ export const mockData2: ScalePopupProps = {
     scale: {
         helper_id: 7,
         id: 502414,
+        name: "Операторы",
         rate: 2.25,
         rate_head: 2.00,
         limit_percent: 80,
@@ -98,6 +101,7 @@ export const mockData3: ScalePopupProps = {
     scale: {
         helper_id: 65,
         id: 502415,
+        name: "Алхимики",
         rate: 1.25,
         rate_head: 1.00,
         limit_percent: 100,
@@ -127,6 +131,7 @@ export const mockData4: ScalePopupProps = {
     scale: {
         helper_id: 16,
         id: 202413,
+        name: "Менеджеры",
         rate: 1.25,
         rate_head: 1.00,
         limit_percent: 100,
@@ -156,6 +161,7 @@ export const mockData5: ScalePopupProps = {
     scale: {
         helper_id: 236,
         id: 5025513,
+        name: "Операторы 2",
         rate: 1.25,
         rate_head: 1.00,
         limit_percent: 100,

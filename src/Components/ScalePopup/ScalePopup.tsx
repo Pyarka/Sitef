@@ -5,7 +5,7 @@ import {
     ScalePopupProps,
     ValuesInterface,
     scaleSaving,
-    ScalePopupSaveEdit, formatValuesBeforeSave, getAllScaleRequest
+    ScalePopupSaveEdit, formatValuesBeforeSave, getAllScaleRequest, mockData1
 } from './Helper';
 import NumberBox from "../NumberBox/NumberBox";
 import Selector from "../Selector/Selector";
@@ -59,11 +59,13 @@ const ScalePopup = (): ReactElement => {
     const [limitRate, setLimitRate] = useState(0);
     const [limitMinPercent, setLimitMinPercent] = useState(0);
     const [limitMinRate, setLimitMinRate] = useState(0);
+    const [selectedElement, setSelectedElement] = useState(mockData1);
 
 
 
     const getData = () => {
-        getScaleRequest(scaleId).then(({values, scale}: ScalePopupProps) => {
+        getScaleRequest(scaleId).then((newSelectedElement: ScalePopupProps) => {
+            const {values, scale} = newSelectedElement;
             const newValues = values;
             const newScale = scale.scale;
             const newScaleId = scale.id;
@@ -73,6 +75,7 @@ const ScalePopup = (): ReactElement => {
             const newLimitRate = scale.limit_rate || 0;
             const newLimitMinPercent = scale.limit_minPercent || 0;
             const newLimitMinRate = scale.limit_minRate || 0;
+            setSelectedElement(newSelectedElement);
             setScaleId(newScaleId);
             setScale(getNormalScale(newScale));
             setValues(newValues);
@@ -297,7 +300,7 @@ const ScalePopup = (): ReactElement => {
     if (isVertical) {
         return (
             <ContainerVertical>
-                <Selector isSelected={scaleId} onSelect={(value) => console.log(value)}/>
+                <Selector isSelected={selectedElement} onSelect={(value) => console.log(value)}/>
                 {renderHeaderBlock()}
                 <OrangeBlockHorizontal>
                     <PercentBlock isCenter={!isVertical} isLong={isVertical}>%</PercentBlock>

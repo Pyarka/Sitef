@@ -237,7 +237,7 @@ export const ToggleHorizontal = styled(ToggleBox)`
 export const ToggleBlockActive = styled(ToggleBox)`
     background: #00c9d8 url(${rectangleWhite}) center no-repeat;
     border: 1px solid #00a9bb;
-    transform: ${({rotation}: { rotation: number }) => `rotate(${rotation}deg)`}
+    transform: ${({rotation}: { rotation: number }) => `rotate(${rotation}deg)`};
 `;
 
 export const ScaleColumn = styled.div`
