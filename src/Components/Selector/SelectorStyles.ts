@@ -5,6 +5,7 @@ import arrow from '../../Assets/Images/editActive.png';
 export const Container = styled.div `
     display: flex;
     flex-direction: column;
+    position: relative;
 `;
 export const Arrow = styled. div `
     transform: ${({isOpened}: { isOpened: boolean}) => isOpened ?"rotate(180deg)" :""};
@@ -27,4 +28,8 @@ export const SelectedCells = styled. div `
 export const AllCells = styled. div `
     border: 1px solid;
     cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    background: white;
+    width: 100%;
 `;
