@@ -52,7 +52,7 @@ const ScalePopup = (): ReactElement => {
     const [values, setValues] = useState([] as ValuesInterface[]);
     const [isEditingScale, setEditingScale] = useState(false);
     const [isVertical, setVertical] = useState(true);
-    const [scaleId, setScaleId] = useState(0);
+    const [scaleId, setScaleId] = useState(502413);
     const [headRate, setHeadRate] = useState(0);
     const [rate, setRate] =useState(0);
     const [limitPercent, setLimitPercent] = useState(0);
@@ -68,7 +68,6 @@ const ScalePopup = (): ReactElement => {
             const {values, scale} = newSelectedElement;
             const newValues = values;
             const newScale = scale.scale;
-            const newScaleId = scale.id;
             const newRate = scale.rate;
             const newHeadRate = scale.rate_head;
             const newLimitPercent = scale.limit_percent || 0;
@@ -76,7 +75,6 @@ const ScalePopup = (): ReactElement => {
             const newLimitMinPercent = scale.limit_minPercent || 0;
             const newLimitMinRate = scale.limit_minRate || 0;
             setSelectedElement(newSelectedElement);
-            setScaleId(newScaleId);
             setScale(getNormalScale(newScale));
             setValues(newValues);
             setRate(newRate);
@@ -92,7 +90,7 @@ const ScalePopup = (): ReactElement => {
 
     useEffect(() => {
         getData();
-    }, []);
+    }, [scaleId]);
 
 
 
@@ -240,7 +238,6 @@ const ScalePopup = (): ReactElement => {
     }
     const renderHeaderBlock = (): ReactElement => {
         return <HeaderBlock>
-            <ChangeScaleList onClick={() => getData()}><option>Сменить шкалу</option></ChangeScaleList>
             <ToggleEdit onClick={() => {
                 if(!isEditingScale) {
                     setEditingScale(!isEditingScale);
@@ -300,7 +297,7 @@ const ScalePopup = (): ReactElement => {
     if (isVertical) {
         return (
             <ContainerVertical>
-                <Selector isSelected={selectedElement} onSelect={(value) => console.log(value)}/>
+                <Selector isSelected={selectedElement} onSelect={(value) => setScaleId(value)}/>
                 {renderHeaderBlock()}
                 <OrangeBlockHorizontal>
                     <PercentBlock isCenter={!isVertical} isLong={isVertical}>%</PercentBlock>

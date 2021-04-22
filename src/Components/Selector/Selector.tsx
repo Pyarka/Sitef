@@ -7,6 +7,7 @@ import {Container,
     SelectedNameCell,
     SelectedCells,
     AllCells,
+    AllElementsContainer,
     } from './SelectorStyles';
 import {getAllScaleRequest, ScalePopupProps} from "../ScalePopup/Helper";
 
@@ -25,7 +26,7 @@ interface SelectorProps {
  * @constructor
  */
 const Selector = ({isSelected, onSelect}: SelectorProps):ReactElement => {
-    const [isOpened, setOpened] = useState(true);
+    const [isOpened, setOpened] = useState(false);
     const [selectedElement, setSelectedElement] = useState(isSelected.scale.id);
     const [allScales, setAllScales] = useState([isSelected] as ScalePopupProps[]);
     //1. Рендер первой строки, на этой строке выбранный элемент и стрелка вниз.
@@ -53,26 +54,28 @@ const Selector = ({isSelected, onSelect}: SelectorProps):ReactElement => {
 
     const choiceElement = (id: number) => {
         setSelectedElement(id);
+        onSelect(id);
     }
 
-    const renderAllElements = (): ReactElement[] => {
-
-        return allScales.filter(({scale}) => scale.id !== selectedElement).map(({scale}) => {
-            const {id, name} = scale;
-            return (
-                <AllCells onClick={() => choiceElement(id)} key={id}>
-                    <IdCell>{id}</IdCell>
-                    <NameCell>{name}</NameCell>
-                </AllCells>
-            )
-        })
+    const renderAllElements = (): ReactElement[] | null => {
+        if(isOpened) {
+            return allScales.filter(({scale}) => scale.id !== selectedElement).map(({scale}) => {
+                const {id, name} = scale;
+                return (
+                    <AllCells onClick={() => choiceElement(id)} key={id}>
+                        <IdCell>{id}</IdCell>
+                        <NameCell>{name}</NameCell>
+                    </AllCells>
+                )
+            })
+        } else {
+            return null;
+        }
 
     }
 
     const renderSelectedElement = (): ReactElement | null => {
         const currentElement: ScalePopupProps | undefined = allScales.find(({scale}) => scale.id === selectedElement);
-        console.log (currentElement);
-        console.log (allScales);
         if (currentElement === undefined) return null;
         const {id, name} = currentElement.scale;
         return (
@@ -86,7 +89,9 @@ const Selector = ({isSelected, onSelect}: SelectorProps):ReactElement => {
     return (
         <Container>
             {renderSelectedElement()}
-            {renderAllElements()}
+            <AllElementsContainer>
+                {renderAllElements()}
+            </AllElementsContainer>
         </Container>
     );
 };

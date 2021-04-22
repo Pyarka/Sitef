@@ -108,7 +108,7 @@ export const mockData3: ScalePopupProps = {
         limit_minPercent: 10,
         limit_minRate: 0.1,
         limit_rate: 1.2,
-        scale: '["1500000","1000000","500000","100000","0"]',
+        scale: '["28","56","352","906","246"]',
         type_calc: 0,
     },
     values: [
@@ -138,7 +138,7 @@ export const mockData4: ScalePopupProps = {
         limit_minPercent: 10,
         limit_minRate: 0.1,
         limit_rate: 1.2,
-        scale: '["1500000","1000000","500000","100000","0"]',
+        scale: '["574","58","23","789","743"]',
         type_calc: 0,
     },
     values: [
@@ -168,7 +168,7 @@ export const mockData5: ScalePopupProps = {
         limit_minPercent: 10,
         limit_minRate: 0.1,
         limit_rate: 1.2,
-        scale: '["1500000","1000000","500000","100000","0"]',
+        scale: '["154","851","942","593","19"]',
         type_calc: 0,
     },
     values: [
@@ -202,8 +202,8 @@ export const getNormalScale = (stringScale: string): string[] => stringScale.spl
     .map(x => x.replace(/([^\d]*)(\d*(\.\d{0,2})?)(.*)/, '$2'));
 
 export const getScaleRequest = (idScale: number): Promise<ScalePopupProps> => {
-    let result = mockData2;
-    if (result.scale.id === idScale) result = mockData1;
+    //вернуть из массива имеюшихся тестовых данных объект у которого id шкалы равно idScale
+    const result = [mockData1, mockData2, mockData3, mockData4, mockData5].find((a) => a.scale.id === idScale) || mockData1;
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(result);
